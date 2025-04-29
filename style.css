@@ -1,0 +1,187 @@
+body {
+    font-family: sans-serif;
+    background-color: #18181b;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff75a0; /* Pink color */
+}
+
+.logo i {
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+nav a i {
+    font-size: 1.2em;
+}
+
+main {
+    padding: 40px;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 500px;
+}
+
+.hero-text h1 {
+    font-size: 3.5em;
+    color: #ff75a0;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-buttons button.primary {
+    background-color: #ff75a0;
+    color: #fff;
+}
+
+.hero-buttons button.primary:hover {
+    background-color: #e6618c;
+}
+
+.hero-buttons button {
+    background-color: #28282b;
+    color: #ccc;
+}
+
+.hero-buttons button:hover {
+    background-color: #38383b;
+    color: #fff;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 117, 160, 0.5)); /* Pink glow effect */
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjust min-width for side-by-side */
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: #28282b;
+    padding: 20px; /* Reduced padding for side-by-side */
+    border-radius: 8px;
+    display: flex; /* Enable flexbox for side-by-side layout */
+    align-items: center; /* Vertically align image and text */
+    gap: 15px; /* Spacing between image and text */
+}
+
+.feature-card img {
+    max-width: 60px; /* Adjust image size for side-by-side */
+    height: auto;
+}
+
+.feature-card-text {
+    flex: 1; /* Allow text to take remaining space */
+    text-align: left; /* Align text to the left */
+}
+
+.feature-card-text h3 {
+    color: #eee;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.feature-card-text p {
+    color: #ccc;
+    line-height: 1.4;
+    font-size: 0.9em; /* Slightly smaller font for better fit */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    margin-top: 60px;
+}
+
+.video-feature-card video {
+    max-width: 100%; /* Make the video responsive */
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.video-feature-card h3 {
+    color: #eee;
+    margin-bottom: 5px;
+}
+
+.video-feature-card p {
+    color: #ccc;
+    line-height: 1.4;
+    font-size: 0.9em;
+}
