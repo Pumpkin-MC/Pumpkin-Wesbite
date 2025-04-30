@@ -91,7 +91,9 @@ main {
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
 .hero-buttons button.primary {
@@ -121,12 +123,17 @@ main {
 .hero-image img {
     max-width: 300px;
     height: auto;
-    filter: drop-shadow(0 0 20px rgba(255, 117, 160, 0.5)); /* Pink glow effect */
+    filter: drop-shadow(
+        0 0 20px rgba(255, 117, 160, 0.5)
+    ); /* Pink glow effect */
 }
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjust min-width for side-by-side */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(350px, 1fr)
+    ); /* Adjust min-width for side-by-side */
     gap: 30px;
 }
 
