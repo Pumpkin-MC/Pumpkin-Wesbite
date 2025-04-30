@@ -4,6 +4,8 @@ body {
     color: #e0e0e0;
     margin: 0;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 header {
@@ -11,6 +13,9 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -145,8 +150,8 @@ main {
     flex-direction: row; /* Stack content vertically */
     align-items: center; /* Vertically align image and text */
     gap: 15px; /* Spacing between image and text */
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px); /* Ensure the card doesn't exceed viewport */
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px); /* Ensure the card doesn't exceed viewport */
     box-sizing: border-box; /* Include padding in width calculation */
     overflow: hidden; /* Prevent content from spilling out */
 }
@@ -189,6 +194,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
@@ -199,9 +208,17 @@ footer {
         margin-bottom: 30px;
     }
 
+    .hero-text h1 {
+        font-size: 2.5em;
+    }
+
     .hero-buttons {
         justify-content: center;
         flex-wrap: wrap;
+    }
+
+    .hero-buttons button {
+        margin-bottom: 10px;
     }
 
     .feature-card {
@@ -213,5 +230,11 @@ footer {
     .feature-card img {
         width: 100%; /* Full width on mobile */
         margin-bottom: 20px;
+    }
+
+    @media (max-width: 480px) {
+        nav ul li:first-child {
+            display: none;
+        }
     }
 }
