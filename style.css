@@ -163,6 +163,7 @@ main {
     max-width: 750px; /* Limit maximum size */
     display: block;
     flex-shrink: 0; /* Prevent the video from shrinking too much */
+    border-radius: 8px;
 }
 
 .feature-card-content {
