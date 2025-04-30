@@ -145,8 +145,8 @@ main {
     flex-direction: row; /* Stack content vertically */
     align-items: center; /* Vertically align image and text */
     gap: 15px; /* Spacing between image and text */
-    width: 100%;
-    max-width: 100%; /* Ensure the card doesn't exceed viewport */
+    width: calc(100% - 40px);
+    max-width: calc(100% - 40px); /* Ensure the card doesn't exceed viewport */
     box-sizing: border-box; /* Include padding in width calculation */
     overflow: hidden; /* Prevent content from spilling out */
 }
@@ -186,4 +186,32 @@ footer {
     padding: 20px;
     color: #777;
     margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .feature-card {
+        flex-direction: column; /* Stack vertically on mobile */
+        text-align: center;
+    }
+
+    .feature-card video,
+    .feature-card img {
+        width: 100%; /* Full width on mobile */
+        margin-bottom: 20px;
+    }
 }
