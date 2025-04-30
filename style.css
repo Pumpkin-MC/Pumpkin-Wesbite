@@ -191,21 +191,3 @@ footer {
     color: #777;
     margin-top: 60px;
 }
-
-.video-feature-card video {
-    max-width: 100%; /* Make the video responsive */
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.video-feature-card h3 {
-    color: #eee;
-    margin-bottom: 5px;
-}
-
-.video-feature-card p {
-    color: #ccc;
-    line-height: 1.4;
-    font-size: 0.9em;
-}
