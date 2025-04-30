@@ -151,7 +151,8 @@ main {
     overflow: hidden; /* Prevent content from spilling out */
 }
 
-.feature-card video {
+.feature-card video,
+.feature-card img {
     width: 65%; /* Take up half the space */
     height: auto;
     max-width: 750px; /* Limit maximum size */
@@ -161,11 +162,6 @@ main {
 
 .feature-card-content {
     flex: 1;
-}
-
-.feature-card img {
-    max-width: 60px; /* Adjust image size for side-by-side */
-    height: auto;
 }
 
 .feature-card-content {
