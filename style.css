@@ -142,8 +142,25 @@ main {
     padding: 20px; /* Reduced padding for side-by-side */
     border-radius: 8px;
     display: flex; /* Enable flexbox for side-by-side layout */
+    flex-direction: row; /* Stack content vertically */
     align-items: center; /* Vertically align image and text */
     gap: 15px; /* Spacing between image and text */
+    width: 100%;
+    max-width: 100%; /* Ensure the card doesn't exceed viewport */
+    box-sizing: border-box; /* Include padding in width calculation */
+    overflow: hidden; /* Prevent content from spilling out */
+}
+
+.feature-card video {
+    width: 65%; /* Take up half the space */
+    height: auto;
+    max-width: 750px; /* Limit maximum size */
+    display: block;
+    flex-shrink: 0; /* Prevent the video from shrinking too much */
+}
+
+.feature-card-content {
+    flex: 1;
 }
 
 .feature-card img {
@@ -151,18 +168,18 @@ main {
     height: auto;
 }
 
-.feature-card-text {
+.feature-card-content {
     flex: 1; /* Allow text to take remaining space */
     text-align: left; /* Align text to the left */
 }
 
-.feature-card-text h3 {
+.feature-card-content h3 {
     color: #eee;
     margin-top: 0;
     margin-bottom: 5px;
 }
 
-.feature-card-text p {
+.feature-card-content p {
     color: #ccc;
     line-height: 1.4;
     font-size: 0.9em; /* Slightly smaller font for better fit */
