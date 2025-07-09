@@ -129,7 +129,10 @@ main {
     gap: 15px;
 }
 
-.hero-buttons button {
+.hero-buttons .button {
+    /* Base styles for ALL buttons */
+    display: inline-block;
+    /* Ensure padding and dimensions work correctly for <a> */
     padding: 15px 30px;
     border: none;
     border-radius: 20px;
@@ -138,25 +141,34 @@ main {
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
+    text-decoration: none;
+    /* Disables link underline */
+    text-align: center;
+    /* Ensures text is centered if button has fixed width */
+    white-space: nowrap;
+    /* Prevents text from wrapping if button is small */
 }
 
-.hero-buttons button.primary {
-    background-color: #ff75a0;
-    color: #fff;
-}
-
-.hero-buttons button.primary:hover {
-    background-color: #e6618c;
-}
-
-.hero-buttons button {
+/* Specific styles for the default (non-primary) buttons */
+.hero-buttons .button {
+    /* This rule is now after the general setup, before primary */
     background-color: #28282b;
     color: #ccc;
 }
 
-.hero-buttons button:hover {
+.hero-buttons .button:hover {
     background-color: #38383b;
     color: #fff;
+}
+
+/* Specific styles for the primary button (should come LAST for correct override) */
+.hero-buttons .primary {
+    background-color: #ff75a0;
+    color: #fff;
+}
+
+.hero-buttons .primary:hover {
+    background-color: #e6618c;
 }
 
 .hero-image {
