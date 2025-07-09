@@ -21,9 +21,10 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
-    color: #ff75a0; /* Pink color */
+    color: #ff75a0;
+    /* Pink color */
 }
 
 .logo i {
@@ -46,14 +47,53 @@ nav a {
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-size: 1.1em;
+    font-weight: bold;
+    /* ADDED THIS LINE to make all nav links bold */
 }
 
 nav a:hover {
     color: #fff;
 }
 
-nav a i {
-    font-size: 1.2em;
+/* CORRECTED STYLING FOR SOCIAL MEDIA AND MOON ICONS */
+/* Target the <i> element directly within the <a> */
+nav ul li a i.fab,
+nav ul li a i.fa-moon {
+    color: #ff75a0;
+    /* Use your brand pink for the icons */
+    font-size: 1.5em;
+    /* Make them a bit larger to stand out */
+    /* Override padding inherited from nav ul li a */
+    padding: 0;
+    /* Remove padding from the icon itself */
+    margin: 0;
+    /* Remove margin from the icon itself */
+}
+
+nav ul li a i.fab:hover,
+nav ul li a i.fa-moon:hover {
+    color: #fff;
+    /* White on hover for better contrast */
+}
+
+.donation-button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.donation-button:hover {
+    background-color: #e0529d;
+}
+
+nav ul li a {
+    padding: 10px 15px;
+    display: block;
 }
 
 main {
@@ -127,41 +167,50 @@ main {
 .hero-image img {
     max-width: 500px;
     height: auto;
-    filter: drop-shadow(
-        0 0 100px rgba(255, 117, 160, 0.5)
-    ); /* Pink glow effect */
+    filter: drop-shadow(0 0 100px rgba(255, 117, 160, 0.5));
+    /* Pink glow effect */
 }
 
 .features {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(350px, 1fr)
-    ); /* Adjust min-width for side-by-side */
+    grid-template-columns: repeat(auto-fit,
+            minmax(350px, 1fr));
+    /* Adjust min-width for side-by-side */
     gap: 30px;
 }
 
 .feature-card {
     background-color: #28282b;
-    padding: 20px; /* Reduced padding for side-by-side */
+    padding: 20px;
+    /* Reduced padding for side-by-side */
     border-radius: 8px;
-    display: flex; /* Enable flexbox for side-by-side layout */
-    flex-direction: row; /* Stack content vertically */
-    align-items: center; /* Vertically align image and text */
-    gap: 15px; /* Spacing between image and text */
+    display: flex;
+    /* Enable flexbox for side-by-side layout */
+    flex-direction: row;
+    /* Stack content vertically */
+    align-items: center;
+    /* Vertically align image and text */
+    gap: 15px;
+    /* Spacing between image and text */
     width: 100%;
-    max-width: 100%; /* Ensure the card doesn't exceed viewport */
-    box-sizing: border-box; /* Include padding in width calculation */
-    overflow: hidden; /* Prevent content from spilling out */
+    max-width: 100%;
+    /* Ensure the card doesn't exceed viewport */
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    overflow: hidden;
+    /* Prevent content from spilling out */
 }
 
 .feature-card video,
 .feature-card img {
-    width: 70%; /* Take up half the space */
+    width: 70%;
+    /* Take up half the space */
     height: auto;
-    max-width: 750px; /* Limit maximum size */
+    max-width: 750px;
+    /* Limit maximum size */
     display: block;
-    flex-shrink: 0; /* Prevent the video from shrinking too much */
+    flex-shrink: 0;
+    /* Prevent the video from shrinking too much */
     border-radius: 8px;
 }
 
@@ -170,8 +219,10 @@ main {
 }
 
 .feature-card-content {
-    flex: 1; /* Allow text to take remaining space */
-    text-align: left; /* Align text to the left */
+    flex: 1;
+    /* Allow text to take remaining space */
+    text-align: left;
+    /* Align text to the left */
 }
 
 .feature-card-content h3 {
@@ -183,7 +234,8 @@ main {
 .feature-card-content p {
     color: #ccc;
     line-height: 1.4;
-    font-size: 0.9em; /* Slightly smaller font for better fit */
+    font-size: 0.9em;
+    /* Slightly smaller font for better fit */
 }
 
 footer {
@@ -222,13 +274,15 @@ footer {
     }
 
     .feature-card {
-        flex-direction: column; /* Stack vertically on mobile */
+        flex-direction: column;
+        /* Stack vertically on mobile */
         text-align: center;
     }
 
     .feature-card video,
     .feature-card img {
-        width: 100%; /* Full width on mobile */
+        width: 100%;
+        /* Full width on mobile */
         margin-bottom: 20px;
     }
 
@@ -236,5 +290,556 @@ footer {
         nav ul li:first-child {
             display: none;
         }
+    }
+}
+
+/* --- Comparison Table Styles --- */
+/* --- Comparison Table Styles --- */
+.comparison-section {
+    padding: 80px 30px;
+    /* Increased padding for more space around the table */
+    background-color: #1a1a20;
+    /* Darker background for the section */
+    text-align: center;
+}
+
+.comparison-title {
+    font-size: 3em;
+    /* Made title bigger */
+    color: #ff75a0;
+    /* Pink color as in your logo */
+    margin-bottom: 15px;
+    /* More space below title */
+    font-weight: bold;
+}
+
+.comparison-subtitle {
+    font-size: 1.3em;
+    /* Made subtitle bigger */
+    color: #ccc;
+    margin-bottom: 60px;
+    /* More space below subtitle */
+}
+
+.comparison-table-container {
+    overflow-x: auto;
+    /* Ensures table is scrollable on smaller screens */
+    max-width: 1200px;
+    /* Increased max width for a bigger table to fit 5 columns */
+    margin: 0 auto;
+    /* Center the table container */
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #24242e;
+    /* Table background color */
+    color: #e0e0e0;
+    min-width: 750px;
+    /* Increased min-width to accommodate 5 columns */
+    font-size: 1.1em;
+    /* Increased base font for the whole table */
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 12px 20px;
+    /* Adjusted padding to accommodate new description line */
+    border: 1px solid #333;
+    /* Darker border for cells */
+    text-align: left;
+    vertical-align: top;
+    /* Align content to the top to prevent descriptions from pushing down */
+}
+
+/* Header styles */
+.comparison-table thead th {
+    background-color: #2a2a36;
+    /* Header background */
+    color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+    /* Center headers */
+    font-size: 1.2em;
+    /* Made header font bigger */
+    padding: 18px 20px;
+    /* Increased padding for headers */
+    white-space: nowrap;
+    /* Keep headers on one line */
+}
+
+/* Styling for small logos within the table headers */
+.comparison-table th .server-header-logo {
+    height: 1.2em;
+    /* Control the height of the small logo relative to font size */
+    vertical-align: middle;
+    /* Align with text baseline */
+    margin-right: 8px;
+    /* Space between logo and text */
+    display: inline-block;
+    /* Ensure it behaves like text for vertical alignment */
+}
+
+
+/* Specific styling for the feature name column header */
+.comparison-table th.table-header-feature {
+    background-color: transparent;
+    /* No background for the empty feature header */
+    border: none;
+    /* No border for the empty feature header */
+    width: 35%;
+    /* Adjusted width for feature column to make space for 5 columns */
+    text-align: left;
+}
+
+/* Headers for Pumpkin, Vanilla, Spigot/Paper, Folia */
+.comparison-table th.table-header-runtime {
+    border-bottom: none;
+    /* No border at the bottom for these specific headers */
+    width: 16%;
+    /* Distribute remaining width among 4 runtime columns (100-35 = 65 / 4 = 16.25, rounded to 16) */
+}
+
+/* Category Headers (e.g., "Core Features & Performance") */
+.comparison-table .category-header td {
+    background-color: #1f1f28;
+    /* Slightly different background for categories */
+    font-weight: bold;
+    font-size: 1.2em;
+    /* Made category header font bigger */
+    padding: 18px 20px;
+    /* Increased padding for category headers */
+    text-align: left;
+    border-bottom: 2px solid #3d3d4a;
+    /* Stronger separator */
+    border-top: 2px solid #3d3d4a;
+    /* Stronger separator */
+}
+
+/* Feature Names */
+.comparison-table .feature-name {
+    font-weight: 500;
+    color: #e0e0e0;
+    /* General text color */
+    white-space: normal;
+    /* Allow feature name to wrap if needed */
+}
+
+/* Styling for the sub-description under feature names */
+.feature-sub-description {
+    display: block;
+    /* Make it take its own line */
+    font-size: 0.8em;
+    /* Smaller font size for description */
+    color: #a0a0a0;
+    /* Lighter color for description */
+    margin-top: 4px;
+    /* Small space above the description */
+    line-height: 1.4;
+    /* Improve readability of description */
+}
+
+/* Icon columns (Pumpkin, Vanilla, Spigot/Paper, Folia) */
+.comparison-table td:nth-child(2),
+/* Pumpkin column */
+.comparison-table td:nth-child(3),
+/* Vanilla column */
+.comparison-table td:nth-child(4),
+/* Spigot/Paper column */
+.comparison-table td:nth-child(5) {
+    /* Folia column */
+    text-align: center;
+    /* Center icons */
+    width: 15%;
+    /* Keep width, or adjust as needed for balance */
+}
+
+/* Icon Colors */
+.check-icon {
+    color: #4CAF50;
+    /* Green */
+    font-size: 1.1em;
+    /* Made icons smaller */
+}
+
+.warning-icon {
+    color: #FFC107;
+    /* Amber/Orange */
+    font-size: 1.1em;
+    /* Made icons smaller */
+}
+
+.cross-icon {
+    color: #F44336;
+    /* Red */
+    font-size: 1.1em;
+    /* Made icons smaller */
+}
+
+/* Responsive adjustments for the table */
+@media (max-width: 768px) {
+    .comparison-section {
+        padding: 40px 15px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .comparison-title {
+        font-size: 2.5em;
+        /* Adjusted for mobile */
+    }
+
+    .comparison-subtitle {
+        font-size: 1.1em;
+        /* Adjusted for mobile */
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px 10px;
+        /* Adjusted padding for smaller screens */
+        font-size: 0.85em;
+        /* Smaller font on small screens */
+    }
+
+    .comparison-table .feature-name {
+        white-space: normal;
+        /* Allow feature names to wrap on small screens */
+    }
+
+    .feature-sub-description {
+        font-size: 0.7em;
+        /* Even smaller description on mobile */
+        margin-top: 2px;
+    }
+
+    /* Adjusted icon columns for responsiveness */
+    .comparison-table td:nth-child(2),
+    .comparison-table td:nth-child(3),
+    .comparison-table td:nth-child(4),
+    .comparison-table td:nth-child(5) {
+        width: 45px;
+        /* Further adjusted width for 4 icon columns on mobile */
+    }
+
+    .check-icon,
+    .warning-icon,
+    .cross-icon {
+        font-size: 0.9em;
+        /* Even smaller icons on mobile */
+    }
+
+    .comparison-table th .server-header-logo {
+        height: 0.9em;
+        /* Make logos smaller on mobile */
+        margin-right: 4px;
+    }
+
+    .comparison-table thead th {
+        padding: 10px 8px;
+        /* Adjust header padding on mobile */
+        font-size: 1em;
+        /* Smaller header font on mobile */
+    }
+
+    .comparison-table th.table-header-feature {
+        width: 38%;
+        /* Adjusted width for feature column on mobile */
+    }
+
+    .comparison-table th.table-header-runtime {
+        width: 15%;
+        /* Adjusted width for runtime columns on mobile */
+    }
+
+    .comparison-table .category-header td {
+        font-size: 1em;
+        /* Smaller category header font on mobile */
+        padding: 12px 10px;
+    }
+}
+
+
+/* --- General Table Styling (Ensure these are present or updated) --- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table tbody td {
+    border: 1px solid #3d3d4a;
+    padding: 15px 10px;
+}
+
+/* --- Chart Row (Overall container for each chart) --- */
+.chart-row td {
+    padding: 30px 20px;
+    background-color: #2a2a36;
+    border-top: 2px solid #3d3d4a;
+    border-bottom: 2px solid #3d3d4a;
+    text-align: center;
+}
+
+.chart-title {
+    font-size: 2em;
+    color: #ff75a0;
+    margin-bottom: 10px;
+}
+
+.chart-subtitle {
+    font-size: 1em;
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+
+/* --- Chart Container (for the screenshot-like layout) --- */
+.chart-container-screenshot {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.chart-item-screenshot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    color: #e0e0e0;
+    font-size: 1.1em;
+    position: relative;
+}
+
+.item-label {
+    flex-basis: 120px;
+    flex-shrink: 0;
+    font-weight: 500;
+}
+
+.item-value {
+    flex-basis: 80px;
+    flex-shrink: 0;
+    text-align: right;
+    font-weight: bold;
+    color: #fff;
+}
+
+.bar-area {
+    flex-grow: 1;
+    height: 25px;
+    background-color: #3f3f4a;
+    /* Background for the bar track */
+    border-radius: 5px;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Removed animation properties */
+.bar {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #555555;
+    /* Gray color for all bars by default */
+    flex-shrink: 0;
+    /* Removed width: 0 !important; and transition: width ...; */
+    /* The width will now be directly controlled by the inline style in HTML */
+}
+
+/* Specific bar colors */
+.pumpkin-bar {
+    background-color: #FFA500;
+    /* Orange color for Pumpkin */
+}
+
+.relative-text {
+    position: absolute;
+    left: 10px;
+    color: #eee;
+    font-size: 0.9em;
+    font-style: italic;
+    white-space: nowrap;
+    z-index: 1;
+    mix-blend-mode: difference;
+}
+
+/* Hide relative text for the best-performing items */
+.chart-item-screenshot .bar-area>.bar.pumpkin-bar+.relative-text,
+.chart-item-screenshot .bar-area>.bar.folia-bar+.relative-text {
+    display: none;
+}
+
+
+/* --- Responsive Adjustments for Chart --- */
+@media (max-width: 768px) {
+    .chart-row td {
+        padding: 20px 15px;
+    }
+
+    .chart-title {
+        font-size: 1.6em;
+    }
+
+    .chart-subtitle {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+
+    .chart-container-screenshot {
+        gap: 10px;
+    }
+
+    .chart-item-screenshot {
+        font-size: 1em;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .item-label {
+        flex-basis: auto;
+        margin-right: 10px;
+    }
+
+    .bar-area {
+        margin: 5px 0;
+        width: 100%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        order: 1;
+    }
+
+    .item-value {
+        flex-basis: auto;
+        order: 2;
+        font-size: 0.9em;
+        margin-left: auto;
+    }
+
+    .relative-text {
+        position: static;
+        margin-left: 5px;
+        font-size: 0.8em;
+        color: #e0e0e0;
+        mix-blend-mode: normal;
+        order: 3;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-title {
+        font-size: 1.4em;
+    }
+
+    .chart-subtitle {
+        font-size: 0.85em;
+    }
+
+    .item-value {
+        font-size: 0.8em;
+    }
+}
+
+
+/* --- End Call to Action Section --- */
+.end-call-to-action-section {
+    padding: 100px 30px;
+    /* Generous padding for visual separation */
+    background-color: #1a1a20;
+    /* Dark background, consistent with other sections */
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.end-call-to-action-title {
+    font-size: 3.5em;
+    /* Large, inviting title */
+    color: #ff75a0;
+    /* Your brand's pink accent color */
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow for depth */
+}
+
+.end-call-to-action-text {
+    font-size: 1.5em;
+    /* Clear and encouraging sub-text */
+    color: #ccc;
+    max-width: 800px;
+    /* Limit width for readability */
+    margin: 0 auto 50px auto;
+    /* Center text and add space below */
+    line-height: 1.6;
+}
+
+.install-pumpkin-button {
+    display: inline-block;
+    /* Allows padding and margin */
+    background-color: #ff75a0;
+    /* Pink button background */
+    color: #fff;
+    /* White text */
+    padding: 20px 40px;
+    /* Generous padding for a prominent button */
+    font-size: 1.8em;
+    /* Large font size for the button text */
+    font-weight: bold;
+    text-decoration: none;
+    /* Remove underline from link */
+    border-radius: 10px;
+    /* Slightly rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth hover effects */
+    box-shadow: 0 8px 15px rgba(255, 117, 160, 0.4);
+    /* Soft glow/shadow */
+}
+
+.install-pumpkin-button:hover {
+    background-color: #ff5f92;
+    /* Slightly darker pink on hover */
+    transform: translateY(-3px);
+    /* Lift button slightly on hover */
+    box-shadow: 0 12px 20px rgba(255, 117, 160, 0.6);
+    /* More pronounced shadow */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .end-call-to-action-section {
+        padding: 60px 20px;
+    }
+
+    .end-call-to-action-title {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+
+    .end-call-to-action-text {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    .install-pumpkin-button {
+        padding: 15px 30px;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .end-call-to-action-title {
+        font-size: 2em;
+    }
+
+    .end-call-to-action-text {
+        font-size: 1em;
+    }
+
+    .install-pumpkin-button {
+        font-size: 1.2em;
+        padding: 12px 25px;
     }
 }
