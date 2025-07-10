@@ -23,8 +23,8 @@ header {
     align-items: center;
     font-size: 2em;
     font-weight: bold;
-    color: #ff75a0;
-    /* Pink color */
+    color: #FF8C00;
+    /* Vibrant Orange color */
 }
 
 .logo i {
@@ -36,6 +36,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
+    /* Keep nav items horizontal */
     align-items: center;
 }
 
@@ -49,22 +50,20 @@ nav a {
     transition: color 0.3s ease;
     font-size: 1.1em;
     font-weight: bold;
-    /* ADDED THIS LINE to make all nav links bold */
 }
 
 nav a:hover {
     color: #fff;
 }
 
-/* CORRECTED STYLING FOR SOCIAL MEDIA AND MOON ICONS */
+/* Specific styling for social media (Discord, GitHub) and moon icons */
 /* Target the <i> element directly within the <a> */
 nav ul li a i.fab,
 nav ul li a i.fa-moon {
-    color: #ff75a0;
-    /* Use your brand pink for the icons */
+    color: #fff;
+    /* Keep these icons white */
     font-size: 1.5em;
     /* Make them a bit larger to stand out */
-    /* Override padding inherited from nav ul li a */
     padding: 0;
     /* Remove padding from the icon itself */
     margin: 0;
@@ -73,12 +72,13 @@ nav ul li a i.fa-moon {
 
 nav ul li a i.fab:hover,
 nav ul li a i.fa-moon:hover {
-    color: #fff;
-    /* White on hover for better contrast */
+    color: #FF8C00;
+    /* Change to orange on hover for a subtle interaction */
 }
 
 .donation-button {
-    background-color: #ff69b4;
+    background-color: #bc4f86;
+    /* Keep pink for donate button */
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
@@ -89,6 +89,7 @@ nav ul li a i.fa-moon:hover {
 
 .donation-button:hover {
     background-color: #e0529d;
+    /* Keep pink for donate button hover */
 }
 
 nav ul li a {
@@ -113,7 +114,8 @@ main {
 
 .hero-text h1 {
     font-size: 3.5em;
-    color: #ff75a0;
+    color: #FF8C00;
+    /* Vibrant Orange color */
     margin-bottom: 10px;
     line-height: 1.1;
 }
@@ -163,12 +165,14 @@ main {
 
 /* Specific styles for the primary button (should come LAST for correct override) */
 .hero-buttons .primary {
-    background-color: #ff75a0;
+    background-color: #FF8C00;
+    /* Vibrant Orange color */
     color: #fff;
 }
 
 .hero-buttons .primary:hover {
-    background-color: #e6618c;
+    background-color: #e67e00;
+    /* Darker vibrant orange on hover */
 }
 
 .hero-image {
@@ -179,8 +183,8 @@ main {
 .hero-image img {
     max-width: 500px;
     height: auto;
-    filter: drop-shadow(0 0 100px rgba(255, 117, 160, 0.5));
-    /* Pink glow effect */
+    filter: drop-shadow(0 0 100px rgba(255, 140, 0, 0.5));
+    /* Vibrant Orange glow effect */
 }
 
 .features {
@@ -262,6 +266,40 @@ footer {
         padding: 20px;
     }
 
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+        font-size: 1.8em;
+    }
+
+    /* Keep nav horizontal on smaller screens */
+    nav ul {
+        flex-direction: row;
+        /* Changed to row */
+        justify-content: center;
+        /* Center items */
+        width: 100%;
+        text-align: center;
+        flex-wrap: wrap;
+        /* Allow wrapping if needed */
+    }
+
+    nav li {
+        margin: 0 10px;
+        /* Reduced horizontal margin for better fit */
+    }
+
+    .donation-button {
+        margin-top: 15px;
+        width: fit-content;
+        /* Adjust button width to content */
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
@@ -281,8 +319,22 @@ footer {
         flex-wrap: wrap;
     }
 
-    .hero-buttons button {
+    .hero-buttons .button {
         margin-bottom: 10px;
+        width: 100%;
+        /* Full width buttons on mobile */
+        box-sizing: border-box;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        filter: drop-shadow(0 0 50px rgba(255, 140, 0, 0.4));
+        /* Adjusted glow for mobile */
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
     }
 
     .feature-card {
@@ -302,10 +354,22 @@ footer {
         nav ul li:first-child {
             display: none;
         }
+
+        /* Further adjust spacing for very small screens */
+        nav li {
+            margin: 0 5px;
+        }
+
+        .hero-text h1 {
+            font-size: 2em;
+        }
+
+        .hero-text p {
+            font-size: 1em;
+        }
     }
 }
 
-/* --- Comparison Table Styles --- */
 /* --- Comparison Table Styles --- */
 .comparison-section {
     padding: 80px 30px;
@@ -318,8 +382,8 @@ footer {
 .comparison-title {
     font-size: 3em;
     /* Made title bigger */
-    color: #ff75a0;
-    /* Pink color as in your logo */
+    color: #FF8C00;
+    /* Vibrant Orange color */
     margin-bottom: 15px;
     /* More space below title */
     font-weight: bold;
@@ -458,7 +522,6 @@ footer {
 .comparison-table td:nth-child(3),
 /* Vanilla column */
 .comparison-table td:nth-child(4),
-/* Spigot/Paper column */
 .comparison-table td:nth-child(5) {
     /* Folia column */
     text-align: center;
@@ -594,7 +657,8 @@ table tbody td {
 
 .chart-title {
     font-size: 2em;
-    color: #ff75a0;
+    color: #FF8C00;
+    /* Vibrant Orange color */
     margin-bottom: 10px;
 }
 
@@ -664,8 +728,8 @@ table tbody td {
 
 /* Specific bar colors */
 .pumpkin-bar {
-    background-color: #FFA500;
-    /* Orange color for Pumpkin */
+    background-color: #FF8C00;
+    /* Vibrant Orange color for Pumpkin */
 }
 
 .relative-text {
@@ -769,8 +833,8 @@ table tbody td {
 .end-call-to-action-title {
     font-size: 3.5em;
     /* Large, inviting title */
-    color: #ff75a0;
-    /* Your brand's pink accent color */
+    color: #FF8C00;
+    /* Vibrant Orange accent color */
     margin-bottom: 20px;
     font-weight: bold;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -791,8 +855,8 @@ table tbody td {
 .install-pumpkin-button {
     display: inline-block;
     /* Allows padding and margin */
-    background-color: #ff75a0;
-    /* Pink button background */
+    background-color: #FF8C00;
+    /* Vibrant Orange button background */
     color: #fff;
     /* White text */
     padding: 20px 40px;
@@ -806,16 +870,16 @@ table tbody td {
     /* Slightly rounded corners */
     transition: background-color 0.3s ease, transform 0.2s ease;
     /* Smooth hover effects */
-    box-shadow: 0 8px 15px rgba(255, 117, 160, 0.4);
+    box-shadow: 0 8px 15px rgba(255, 140, 0, 0.4);
     /* Soft glow/shadow */
 }
 
 .install-pumpkin-button:hover {
-    background-color: #ff5f92;
-    /* Slightly darker pink on hover */
+    background-color: #e67e00;
+    /* Slightly darker vibrant orange on hover */
     transform: translateY(-3px);
     /* Lift button slightly on hover */
-    box-shadow: 0 12px 20px rgba(255, 117, 160, 0.6);
+    box-shadow: 0 12px 20px rgba(255, 140, 0, 0.6);
     /* More pronounced shadow */
 }
 
