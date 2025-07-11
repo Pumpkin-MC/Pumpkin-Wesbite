@@ -301,8 +301,11 @@ footer {
         /* Reduced horizontal margin for better fit */
     }
 
+    nav ul li:last-child {
+        margin-right: 10px;
+    }
+
     .donation-button {
-        margin-top: 15px;
         width: fit-content;
         /* Adjust button width to content */
     }
