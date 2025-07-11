@@ -277,6 +277,47 @@ main {
     /* Slightly smaller font for better fit */
 }
 
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px solid gray;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -65px; /* -width/2+padding/2 */
+    opacity: 0;
+    transition: opacity 0.25s, visibility 0.25s;
+    font-size: 16px;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
 footer {
     text-align: center;
     padding: 20px;
