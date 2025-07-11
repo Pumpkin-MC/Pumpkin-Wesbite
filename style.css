@@ -120,7 +120,7 @@ main {
 }
 
 .hero-text h1 {
-    font-size: 3.5em;
+    font-size: 5vw;
     color: #FF8C00;
     /* Vibrant Orange color */
     margin-bottom: 10px;
@@ -188,6 +188,7 @@ main {
 }
 
 .hero-image img {
+    width: 100%;
     max-width: 500px;
     height: auto;
     filter: drop-shadow(0 0 100px rgba(255, 140, 0, 0.5));
