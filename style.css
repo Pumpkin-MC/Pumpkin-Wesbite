@@ -27,7 +27,11 @@ header {
     /* Vibrant Orange color */
 }
 
-.logo i {
+/*.logo i {
+    margin-right: 10px;
+}*/
+
+.logo img {
     margin-right: 10px;
 }
 
@@ -41,7 +45,7 @@ nav ul {
 }
 
 nav li {
-    margin-left: 20px;
+    margin: 0 10px;
 }
 
 nav a {
