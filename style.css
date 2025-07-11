@@ -97,8 +97,11 @@ nav ul li a i.fa-moon:hover {
 }
 
 nav ul li a {
-    padding: 10px 15px;
     display: block;
+}
+
+nav ul li:last-child {
+    margin-right: 0px;
 }
 
 main {
