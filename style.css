@@ -35,6 +35,20 @@ header {
     margin-right: 10px;
 }
 
+.logo-spacer {
+    width: 10px;
+}
+
+nav {
+    display: flex;
+    width: max-content;
+    flex-grow: 1;
+}
+
+.nav-spacer {
+    flex-grow: 1;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -275,38 +289,6 @@ footer {
         padding: 20px;
     }
 
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px 20px;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-        font-size: 1.8em;
-    }
-
-    /* Keep nav horizontal on smaller screens */
-    nav ul {
-        flex-direction: row;
-        /* Changed to row */
-        justify-content: center;
-        /* Center items */
-        width: 100%;
-        text-align: center;
-        flex-wrap: wrap;
-        /* Allow wrapping if needed */
-    }
-
-    nav li {
-        margin: 0 10px;
-        /* Reduced horizontal margin for better fit */
-    }
-
-    nav ul li:last-child {
-        margin-right: 10px;
-    }
-
     .donation-button {
         width: fit-content;
         /* Adjust button width to content */
@@ -362,14 +344,46 @@ footer {
         margin-bottom: 20px;
     }
 
-    @media (max-width: 480px) {
-        nav ul li:first-child {
-            display: none;
+    @media (max-width: 680px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 20px;
         }
 
-        /* Further adjust spacing for very small screens */
+        .logo {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        /* Keep nav horizontal on smaller screens */
+        nav ul {
+            flex-direction: row;
+            /* Changed to row */
+            justify-content: center;
+            /* Center items */
+            text-align: center;
+            flex-wrap: wrap;
+            /* Allow wrapping if needed */
+        }
+
         nav li {
-            margin: 0 5px;
+            margin: 0 10px;
+            /* Reduced horizontal margin for better fit */
+        }
+
+        nav ul li:last-child {
+            margin-right: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        nav {
+            flex-direction: column;
+        }
+
+        .nav-spacer {
+            height: 15px;
         }
 
         .hero-text h1 {
@@ -378,6 +392,20 @@ footer {
 
         .hero-text p {
             font-size: 1em;
+        }
+    }
+
+    @media (max-width: 350px) {
+        nav ul:nth-child(1) {
+            flex-direction: column;
+        }
+
+        nav ul:nth-child(1) li {
+            margin-bottom: 15px;
+        }
+
+        .nav-spacer {
+            height: 0px;
         }
     }
 }
