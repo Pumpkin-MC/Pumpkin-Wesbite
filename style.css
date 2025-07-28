@@ -42,11 +42,11 @@ header {
 nav {
     display: flex;
     width: max-content;
-    flex-grow: 1;
+    justify-content: flex-end;
 }
 
 .nav-spacer {
-    flex-grow: 1;
+    width: 15px;
 }
 
 nav ul {
@@ -415,6 +415,11 @@ footer {
 
         nav ul li:last-child {
             margin-right: 10px;
+        }
+
+        .nav-spacer {
+            width: 0px;
+            height: 0px;
         }
     }
 
