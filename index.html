@@ -1,376 +1,449 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PumpkinMC</title>
-    <meta name="description"
-        content="Pumpkin: The fastest, most efficient Minecraft server software for an unparalleled gameplay experience." />
-    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-pumpkin"></i>
-            <span>Pumpkin</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="https://docs.pumpkinmc.org/">Documentation</a></li>
-                <li>
-                    <a href="https://github.com/sponsors/Snowiiii" class="donation-button">
-                        <i class="fa-solid fa-heart"></i> Donate
-                    </a>
-                </li>
-                <li>
-                    <a href="https://discord.com/invite/wT8XjrjKkf"><i class="fab fa-discord"></i></a>
-                </li>
-                <li>
-                    <a href="https://github.com/Pumpkin-MC"><i class="fab fa-github"></i></a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK7NXQQ2ZP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-QK7NXQQ2ZP');
-    </script>
-
-
-    <main>
-        <section class="hero">
-            <div class="hero-image">
-                <img src="assets/icon.svg" alt="Pumpkin Logo" />
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>PumpkinMC</title>
+        <meta name="description"
+              content="Pumpkin: The fastest, most efficient Minecraft server software for an unparalleled gameplay experience."/>
+        <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <!--i class="fa-solid fa-pumpkin"></i-->
+                <img src="assets/icon.svg" alt="Pumpkin Logo" height="32px"/>
+                <span>Pumpkin</span>
             </div>
-            <div class="hero-text">
-                <h1>Pumpkin <br />Minecraft Server</h1>
-                <p>
-                    Empowering everyone to host fast and efficient Minecraft
-                    servers
-                </p>
-                <div class="hero-buttons">
-                    <a href="https://docs.pumpkinmc.org/" class="button primary">Quick Start</a>
-                    <a href="https://docs.pumpkinmc.org/config/introduction" class="button">Configuration</a>
-                    <a href="https://docs.pumpkinmc.org/developer/contributing" class="button">For developers</a>
+            <div class="logo-spacer"></div>
+            <nav>
+                <ul>
+                    <li><a href="https://docs.pumpkinmc.org/">Documentation</a></li>
+                    <li>
+                        <a href="https://github.com/sponsors/Snowiiii" class="donation-button">
+                            <i class="fa-solid fa-heart"></i> Donate
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-spacer"></div>
+                <ul>
+                    <li>
+                        <a href="https://discord.com/invite/wT8XjrjKkf"><i class="fab fa-discord"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Pumpkin-MC"><i class="fab fa-github"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK7NXQQ2ZP"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-QK7NXQQ2ZP');
+        </script>
+        <main>
+            <section class="hero">
+                <div class="hero-image">
+                    <img src="assets/icon.svg" alt="Pumpkin Logo"/>
                 </div>
-            </div>
-        </section>
-
-        <section class="comparison-section">
-            <h2 class="comparison-title">Why choose Pumpkin?</h2>
-            <p class="comparison-subtitle">Experience a new era of Minecraft server hosting: Fast, Efficient, and
-                User-Friendly.</p>
-
-            <div class="comparison-table-container">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th class="table-header-feature"></th>
-                            <th class="table-header-runtime">
-                                <img src="assets/icon.svg" alt="Pumpkin Logo" class="server-header-logo"> Pumpkin
-                            </th>
-                            <th class="table-header-runtime">
-                                <img src="assets/vanilla-logo.png" alt="Vanilla Logo" class="server-header-logo">
-                                Vanilla
-                            </th>
-                            <th class="table-header-runtime">
-                                <img src="assets/paper-logo.png" alt="Spigot/PaperMC Logo" class="server-header-logo">
-                                Spigot/Paper
-                            </th>
-                            <th class="table-header-runtime">
-                                <img src="assets/folia-logo.png" alt="Folia Logo" class="server-header-logo"> Folia
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="category-header">
-                            <td colspan="5">Performance & Efficiency</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Fast Startup Times
-                                <span class="feature-sub-description">Get your server online in seconds.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"
-                                    title="Slower startup due to less optimization."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"
-                                    title="Can have slower startup due to complex initialization."></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Optimized CPU Utilization
-                                <span class="feature-sub-description">Maximize performance while minimizing resource
+                <div class="hero-text">
+                    <h1>Pumpkin <br/>Minecraft Server</h1>
+                    <p>
+                        Empowering everyone to host fast and efficient Minecraft
+                        servers
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://docs.pumpkinmc.org/" class="button primary">Quick Start</a>
+                        <a href="https://docs.pumpkinmc.org/config/introduction" class="button">Configuration</a>
+                        <a href="https://docs.pumpkinmc.org/developer/contributing" class="button">For developers</a>
+                    </div>
+                </div>
+            </section>
+            <section class="comparison-section">
+                <h2 class="comparison-title">Why choose Pumpkin?</h2>
+                <p class="comparison-subtitle">Experience a new era of Minecraft server hosting: Fast, Efficient, and
+                    User-Friendly.</p>
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="table-header-feature"></th>
+                                <th class="table-header-runtime">
+                                    <img src="assets/icon.svg" alt="Pumpkin Logo" class="server-header-logo"> Pumpkin
+                                </th>
+                                <th class="table-header-runtime">
+                                    <img src="assets/vanilla-logo.png" alt="Vanilla Logo" class="server-header-logo">
+                                    Vanilla
+                                </th>
+                                <th class="table-header-runtime">
+                                    <img src="assets/paper-logo.png" alt="Spigot/PaperMC Logo"
+                                         class="server-header-logo">
+                                    Spigot/Paper
+                                </th>
+                                <th class="table-header-runtime">
+                                    <img src="assets/folia-logo.png" alt="Folia Logo" class="server-header-logo"> Folia
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="category-header">
+                                <td colspan="5">Performance & Efficiency</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Fast Startup Times
+                                    <span class="feature-sub-description">Get your server online in seconds.</span>
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-xmark cross-icon"></i>
+                                        <div class="tooltip">Slower startup due to less optimization.</div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-xmark cross-icon"></i>
+                                        <div class="tooltip">Can have slower startup due to complex initialization.
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Optimized CPU Utilization
+                                    <span class="feature-sub-description">Maximize performance while minimizing resource
                                     strain.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Superior Memory Optimization
-                                <span class="feature-sub-description">Run larger servers with less memory.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Multi-threading Support
-                                <span class="feature-sub-description">Leverage modern CPUs for unparalleled
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Superior Memory Optimization
+                                    <span class="feature-sub-description">Run larger servers with less memory.</span>
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Multi-threading Support
+                                    <span class="feature-sub-description">Leverage modern CPUs for unparalleled
                                     scalability.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"
-                                    title="Comprehensive multi-threading for core game logic and tasks."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i>
-                            </td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon" title="Only ticks"></i></td>
-                        </tr>
-
-                        <tr class="category-header">
-                            <td colspan="5">Features & Compatibility</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Bukkit/Paper Plugin Support
-                                <span class="feature-sub-description">Extensive compatibility with existing
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                        <div class="tooltip">Comprehensive multi-threading for core game logic and
+                                            tasks.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i>
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Only ticks.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="category-header">
+                                <td colspan="5">Features & Compatibility</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Bukkit/Paper Plugin Support
+                                    <span class="feature-sub-description">Extensive compatibility with existing
                                     plugins.</span>
-                            </td>
-                            <td><i class="fa-solid fa-xmark cross-icon"
-                                    title="Pumpkin uses its own API, not directly compatible with Bukkit/Paper plugins."></i>
-                            </td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-check check-icon"
-                                    title="Full plugin support via Bukkit/Paper API."></i></td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon"
-                                    title="Compatibility varies; some plugins may require updates due to multi-threading."></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Cross-Edition Compatibility
-                                <span class="feature-sub-description">Allow players on different game editions
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-xmark cross-icon"></i>
+                                        <div class="tooltip">Pumpkin uses its own API, not directly compatible with
+                                            Bukkit/Paper plugins.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                        <div class="tooltip">Full plugin support via Bukkit/Paper API.</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Compatibility varies; some plugins may require updates due
+                                            to
+                                            multi-threading.
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Cross-Edition Compatibility
+                                    <span class="feature-sub-description">Allow players on different game editions
                                     (Java/Bedrock) to join.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"
-                                    title="Built-in support for both Java & Bedrock Editions."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon"
-                                    title="Achievable via external plugins (e.g., GeyserMC)."></i></td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon"
-                                    title="Achievable via external plugins, but setup might be more complex due to multi-threading."></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Comprehensive Developer API
-                                <span class="feature-sub-description">Create custom features and integrations
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                        <div class="tooltip">Built-in support for both Java & Bedrock Editions.</div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Achievable via external plugins (e.g., GeyserMC).</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Achievable via external plugins, but setup might be more
+                                            complex due to multi-threading.
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Comprehensive Developer API
+                                    <span class="feature-sub-description">Create custom features and integrations
                                     easily.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"
-                                    title="Rich and easy-to-use API for extensive customization."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Extensive Configuration Options
-                                <span class="feature-sub-description">Tailor server behavior with granular
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                        <div class="tooltip">Rich and easy-to-use API for extensive customization.</div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Extensive Configuration Options
+                                    <span class="feature-sub-description">Tailor server behavior with granular
                                     control.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"
-                                    title="Provides a large configuration, that will cover every need."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon" </i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Open-Source
-                                <span class="feature-sub-description">Benefit from community contributions &
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                        <div class="tooltip">Provides a large configuration, that will cover every need.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Open-Source
+                                    <span class="feature-sub-description">Benefit from community contributions &
                                     transparency.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon"
-                                    title="Only Open-Source patches"></i></td>
-                            <td><i class="fa-solid fa-triangle-exclamation warning-icon"
-                                    title="Only Open-Source patches"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Multiple World/Chunk Formats
-                                <span class="feature-sub-description">Support for more efficient world data storage and
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Only Open-Source patches.</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                                        <div class="tooltip">Only Open-Source patches.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Multiple World/Chunk Formats
+                                    <span class="feature-sub-description">Support for more efficient world data storage and
                                     loading.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon" title="Primarily uses Anvil format."></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon" title="Primarily uses Anvil format."></i></td>
-                        </tr>
-                        <tr class="category-header">
-                            <td colspan="5">User Experience & Stability</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">
-                                Click & Play
-                                <span class="feature-sub-description">Self-contained executable for instant launch, no
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-xmark cross-icon"></i>
+                                        <div class="tooltip">Primarily uses Anvil format.</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tooltip-container">
+                                        <i class="fa-solid fa-xmark cross-icon"></i>
+                                        <div class="tooltip">Primarily uses Anvil format.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="category-header">
+                                <td colspan="5">User Experience & Stability</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">
+                                    Click & Play
+                                    <span class="feature-sub-description">Self-contained executable for instant launch, no
                                     complex setup or Java installation required.</span>
-                            </td>
-                            <td><i class="fa-solid fa-check check-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon"></i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon" </i></td>
-                            <td><i class="fa-solid fa-xmark cross-icon" </i></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-
-        <tbody>
-            <tr class="chart-row">
-                <td colspan="5" class="chart-cell">
-                    <h3 class="chart-title">Average Startup Times</h3>
-                    <p class="chart-subtitle">Lower is better. Times are illustrative and can vary based on hardware &
-                        configuration.</p>
-                    <div class="chart-container-screenshot">
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Pumpkin</div>
-                            <div class="bar-area">
-                                <div class="bar pumpkin-bar" style="width: calc((0.5 / 80) * 100%);"></div>
+                                </td>
+                                <td><i class="fa-solid fa-check check-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                                <td><i class="fa-solid fa-xmark cross-icon"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <table>
+                <tbody>
+                    <tr class="chart-row">
+                        <td colspan="5" class="chart-cell">
+                            <h3 class="chart-title">Average Startup Times</h3>
+                            <p class="chart-subtitle">Lower is better. Times are illustrative and can vary based on
+                                hardware &
+                                configuration.</p>
+                            <div class="chart-container-screenshot">
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Pumpkin</div>
+                                    <div class="bar-area">
+                                        <div class="bar pumpkin-bar" style="width: calc((0.5 / 80) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~15ms</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Spigot/Paper</div>
+                                    <div class="bar-area">
+                                        <div class="bar spigot-paper-bar" style="width: calc((35 / 80) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~10s</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Folia</div>
+                                    <div class="bar-area">
+                                        <div class="bar folia-bar" style="width: calc((35 / 80) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~10s</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Vanilla</div>
+                                    <div class="bar-area">
+                                        <div class="bar vanilla-bar" style="width: calc((52 / 80) * 100%);"></div>
+                                        <span class="relative-text">600x slower</span>
+                                    </div>
+                                    <div class="item-value">~15s</div>
+                                </div>
                             </div>
-                            <div class="item-value">~15ms</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Spigot/Paper</div>
-                            <div class="bar-area">
-                                <div class="bar spigot-paper-bar" style="width: calc((35 / 80) * 100%);"></div>
+                        </td>
+                    </tr>
+                    <tr class="chart-row">
+                        <td colspan="5" class="chart-cell">
+                            <h3 class="chart-title">Average Idle RAM Usage</h3>
+                            <p class="chart-subtitle">Lower is better. Usage can vary based on loaded chunks &
+                                plugins.</p>
+                            <div class="chart-container-screenshot">
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Pumpkin</div>
+                                    <div class="bar-area">
+                                        <div class="bar pumpkin-bar" style="width: calc((100 / 1800) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~100MB</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Spigot/Paper</div>
+                                    <div class="bar-area">
+                                        <div class="bar spigot-paper-bar"
+                                             style="width: calc((1400 / 1800) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~1.4GB</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Folia</div>
+                                    <div class="bar-area">
+                                        <div class="bar folia-bar" style="width: calc((1600 / 1800) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">~1.6GB</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Vanilla</div>
+                                    <div class="bar-area">
+                                        <div class="bar vanilla-bar" style="width: 100%;"></div>
+                                        <span class="relative-text">~18x more</span>
+                                    </div>
+                                    <div class="item-value">~1.8GB</div>
+                                </div>
                             </div>
-                            <div class="item-value">~10s</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Folia</div>
-                            <div class="bar-area">
-                                <div class="bar folia-bar" style="width: calc((35 / 80) * 100%);"></div>
+                        </td>
+                    </tr>
+                    <tr class="chart-row">
+                        <td colspan="5" class="chart-cell">
+                            <h3 class="chart-title">Average Idle CPU Usage</h3>
+                            <p class="chart-subtitle">Lower is better. Represents CPU consumption when server is
+                                idle.</p>
+                            <div class="chart-container-screenshot">
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Pumpkin</div>
+                                    <div class="bar-area">
+                                        <div class="bar pumpkin-bar" style="width: calc((1 / 100) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">0.1%</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Spigot/Paper</div>
+                                    <div class="bar-area">
+                                        <div class="bar spigot-paper-bar" style="width: calc((3 / 100) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">1-3%</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Folia</div>
+                                    <div class="bar-area">
+                                        <div class="bar folia-bar" style="width: calc((5 / 100) * 100%);"></div>
+                                    </div>
+                                    <div class="item-value">2-5%</div>
+                                </div>
+                                <div class="chart-item-screenshot">
+                                    <div class="item-label">Vanilla</div>
+                                    <div class="bar-area">
+                                        <div class="bar vanilla-bar" style="width: calc((8 / 100) * 100%);"></div>
+                                        <span class="relative-text">~100x more</span>
+                                    </div>
+                                    <div class="item-value">5-10%</div>
+                                </div>
                             </div>
-                            <div class="item-value">~10s</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Vanilla</div>
-                            <div class="bar-area">
-                                <div class="bar vanilla-bar" style="width: calc((52 / 80) * 100%);"></div>
-                                <span class="relative-text">600x slower</span>
-                            </div>
-                            <div class="item-value">~15s</div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-            <tr class="chart-row">
-                <td colspan="5" class="chart-cell">
-                    <h3 class="chart-title">Average Idle RAM Usage</h3>
-                    <p class="chart-subtitle">Lower is better. Usage can vary based on loaded chunks & plugins.</p>
-                    <div class="chart-container-screenshot">
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Pumpkin</div>
-                            <div class="bar-area">
-                                <div class="bar pumpkin-bar" style="width: calc((100 / 1800) * 100%);"></div>
-                            </div>
-                            <div class="item-value">~100MB</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Spigot/Paper</div>
-                            <div class="bar-area">
-                                <div class="bar spigot-paper-bar" style="width: calc((1400 / 1800) * 100%);"></div>
-                            </div>
-                            <div class="item-value">~1.4GB</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Folia</div>
-                            <div class="bar-area">
-                                <div class="bar folia-bar" style="width: calc((1600 / 1800) * 100%);"></div>
-                            </div>
-                            <div class="item-value">~1.6GB</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Vanilla</div>
-                            <div class="bar-area">
-                                <div class="bar vanilla-bar" style="width: 100%;"></div>
-                                <span class="relative-text">~18x more</span>
-                            </div>
-                            <div class="item-value">~1.8GB</div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-            <tr class="chart-row">
-                <td colspan="5" class="chart-cell">
-                    <h3 class="chart-title">Average Idle CPU Usage</h3>
-                    <p class="chart-subtitle">Lower is better. Represents CPU consumption when server is idle.</p>
-                    <div class="chart-container-screenshot">
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Pumpkin</div>
-                            <div class="bar-area">
-                                <div class="bar pumpkin-bar" style="width: calc((1 / 100) * 100%);"></div>
-                            </div>
-                            <div class="item-value">0.1%</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Spigot/Paper</div>
-                            <div class="bar-area">
-                                <div class="bar spigot-paper-bar" style="width: calc((3 / 100) * 100%);"></div>
-                            </div>
-                            <div class="item-value">1-3%</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Folia</div>
-                            <div class="bar-area">
-                                <div class="bar folia-bar" style="width: calc((5 / 100) * 100%);"></div>
-                            </div>
-                            <div class="item-value">2-5%</div>
-                        </div>
-                        <div class="chart-item-screenshot">
-                            <div class="item-label">Vanilla</div>
-                            <div class="bar-area">
-                                <div class="bar vanilla-bar" style="width: calc((8 / 100) * 100%);"></div>
-                                <span class="relative-text">~100x more</span>
-                            </div>
-                            <div class="item-value">5-10%</div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-
-
-        <section class="end-call-to-action-section">
-            <h2 class="end-call-to-action-title">What are you waiting for?</h2>
-            <p class="end-call-to-action-text">Ready to experience the next generation of Minecraft server hosting?</p>
-            <a href="https://docs.pumpkinmc.org/" class="install-pumpkin-button">Install Pumpkin</a>
-        </section>
-    </main>
-</body>
-
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <section class="end-call-to-action-section">
+                <h2 class="end-call-to-action-title">What are you waiting for?</h2>
+                <p class="end-call-to-action-text">Ready to experience the next generation of Minecraft server
+                    hosting?</p>
+                <a href="https://docs.pumpkinmc.org/" class="install-pumpkin-button">Install Pumpkin</a>
+            </section>
+        </main>
+    </body>
 </html>

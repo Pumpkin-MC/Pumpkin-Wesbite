@@ -27,8 +27,26 @@ header {
     /* Vibrant Orange color */
 }
 
-.logo i {
+/*.logo i {
     margin-right: 10px;
+}*/
+
+.logo img {
+    margin-right: 10px;
+}
+
+.logo-spacer {
+    width: 10px;
+}
+
+nav {
+    display: flex;
+    width: max-content;
+    justify-content: flex-end;
+}
+
+.nav-spacer {
+    width: 15px;
 }
 
 nav ul {
@@ -41,7 +59,7 @@ nav ul {
 }
 
 nav li {
-    margin-left: 20px;
+    margin: 0 10px;
 }
 
 nav a {
@@ -93,8 +111,11 @@ nav ul li a i.fa-moon:hover {
 }
 
 nav ul li a {
-    padding: 10px 15px;
     display: block;
+}
+
+nav ul li:last-child {
+    margin-right: 0px;
 }
 
 main {
@@ -113,7 +134,7 @@ main {
 }
 
 .hero-text h1 {
-    font-size: 3.5em;
+    font-size: 5vw;
     color: #FF8C00;
     /* Vibrant Orange color */
     margin-bottom: 10px;
@@ -128,6 +149,7 @@ main {
 
 .hero-buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
 }
 
@@ -181,6 +203,7 @@ main {
 }
 
 .hero-image img {
+    width: 100%;
     max-width: 500px;
     height: auto;
     filter: drop-shadow(0 0 100px rgba(255, 140, 0, 0.5));
@@ -254,6 +277,47 @@ main {
     /* Slightly smaller font for better fit */
 }
 
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px solid gray;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -65px; /* -width/2+padding/2 */
+    opacity: 0;
+    transition: opacity 0.25s, visibility 0.25s;
+    font-size: 16px;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
 footer {
     text-align: center;
     padding: 20px;
@@ -266,36 +330,7 @@ footer {
         padding: 20px;
     }
 
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px 20px;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-        font-size: 1.8em;
-    }
-
-    /* Keep nav horizontal on smaller screens */
-    nav ul {
-        flex-direction: row;
-        /* Changed to row */
-        justify-content: center;
-        /* Center items */
-        width: 100%;
-        text-align: center;
-        flex-wrap: wrap;
-        /* Allow wrapping if needed */
-    }
-
-    nav li {
-        margin: 0 10px;
-        /* Reduced horizontal margin for better fit */
-    }
-
     .donation-button {
-        margin-top: 15px;
         width: fit-content;
         /* Adjust button width to content */
     }
@@ -350,14 +385,51 @@ footer {
         margin-bottom: 20px;
     }
 
-    @media (max-width: 480px) {
-        nav ul li:first-child {
-            display: none;
+    @media (max-width: 680px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 20px;
         }
 
-        /* Further adjust spacing for very small screens */
+        .logo {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        /* Keep nav horizontal on smaller screens */
+        nav ul {
+            flex-direction: row;
+            /* Changed to row */
+            justify-content: center;
+            /* Center items */
+            text-align: center;
+            flex-wrap: wrap;
+            /* Allow wrapping if needed */
+        }
+
         nav li {
-            margin: 0 5px;
+            margin: 0 10px;
+            /* Reduced horizontal margin for better fit */
+        }
+
+        nav ul li:last-child {
+            margin-right: 10px;
+        }
+
+        .nav-spacer {
+            width: 0px;
+            height: 0px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        nav {
+            flex-direction: column;
+        }
+
+        .nav-spacer {
+            height: 15px;
         }
 
         .hero-text h1 {
@@ -366,6 +438,20 @@ footer {
 
         .hero-text p {
             font-size: 1em;
+        }
+    }
+
+    @media (max-width: 350px) {
+        nav ul:nth-child(1) {
+            flex-direction: column;
+        }
+
+        nav ul:nth-child(1) li {
+            margin-bottom: 15px;
+        }
+
+        .nav-spacer {
+            height: 0px;
         }
     }
 }
