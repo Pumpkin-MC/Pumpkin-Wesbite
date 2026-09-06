@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://avatars.githubusercontent.com https://market.pumpkinmc.org data:; connect-src 'self' https://api.github.com https://www.google-analytics.com https://market.pumpkinmc.org http://localhost:5000 http://127.0.0.1:5000; frame-ancestors 'none'"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    <title>Telemetry & Stats - Pumpkin</title>
+    <meta
+      name="description"
+      content="Live ecosystem telemetry, server health, hardware distribution, global world map, and community statistics for Pumpkin and Vine."
+    />
+    <meta property="og:title" content="Telemetry & Stats - Pumpkin" />
+    <meta
+      property="og:description"
+      content="Live ecosystem telemetry, server health, hardware distribution, global world map, and community statistics for Pumpkin and Vine."
+    />
+    <meta property="og:image" content="https://pumpkinmc.org/assets/logos/ogimage.png" />
+    <meta property="og:url" content="https://pumpkinmc.org/stats/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icon.svg" />
+    <link rel="stylesheet" href="../assets/jsvectormap/jsvectormap.min.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../styles/stats.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha384-rWj9FmWWt3OMqd9vBkWRhFavvVUYalYqGPoMdL1brs/qvvqz88gvLShYa4hKNyqb"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="../assets/jsvectormap/jsvectormap.min.js" defer></script>
+    <script src="../assets/jsvectormap/world.js" defer></script>
+    <script src="../i18n.js" defer></script>
+    <script src="stats.js" defer></script>
+  </head>
+
+  <body>
+    <div class="sticky-top">
+      <div class="info-banner">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span data-i18n="banner.earlyDev"
+          >Pumpkin is in early development and bugs can happen. If you find any, report them on our</span
+        >
+        <a href="https://github.com/Pumpkin-MC/Pumpkin/issues" data-i18n="banner.github">GitHub</a>.
+      </div>
+      <header>
+        <a href="/" class="logo">
+          <img src="../assets/icon.svg" alt="Pumpkin" />
+          <span>Pumpkin</span>
+        </a>
+        <nav>
+          <a
+            href="https://docs.pumpkinmc.org/"
+            class="external-nav-link"
+            aria-label="Docs (external site)"
+          >
+            <span data-i18n="nav.docs">Docs</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <a href="/developers/" data-i18n="nav.developers">Developers</a>
+          <a
+            href="https://blog.pumpkinmc.org/"
+            class="external-nav-link"
+            aria-label="Blog (external site)"
+          >
+            <span data-i18n="nav.blog">Blog</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://market.pumpkinmc.org/"
+            class="external-nav-link"
+            aria-label="Market (external site)"
+          >
+            <span data-i18n="nav.market">Market</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <a href="/stats/" class="active" aria-current="page" data-i18n="nav.stats">Stats</a>
+        </nav>
+        <button class="burger-btn" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="header-icons">
+          <a
+            href="https://github.com/Pumpkin-MC/Pumpkin"
+            class="icon-btn"
+            title="GitHub"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="https://discord.com/invite/wT8XjrjKkf"
+            class="icon-btn"
+            title="Discord"
+          >
+            <i class="fa-brands fa-discord"></i>
+          </a>
+          <a href="https://x.com/pumpkinmcdev" class="icon-btn" title="X (Twitter)">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://www.youtube.com/@PumpkinServer" class="icon-btn" title="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <a href="/donate/" class="sponsor-btn" title="Sponsor">
+            <i class="fa-solid fa-heart"></i>
+          </a>
+          <a href="/download/" class="download-btn" data-i18n="nav.download">Download</a>
+        </div>
+      </header>
+    </div>
+
+    <script>
+      document.querySelector(".burger-btn").addEventListener("click", function () {
+        const header = document.querySelector("header");
+        const expanded = this.getAttribute("aria-expanded") === "true";
+        header.classList.toggle("nav-open");
+        this.setAttribute("aria-expanded", !expanded);
+        this.querySelector("i").className = expanded
+          ? "fa-solid fa-bars"
+          : "fa-solid fa-xmark";
+      });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK7NXQQ2ZP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-QK7NXQQ2ZP");
+    </script>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="stats-hero">
+        <div class="hero-status-pill">
+          <span class="live-pulse-dot"></span>
+          <span>Live Ecosystem Telemetry</span>
+        </div>
+        <h1>Ecosystem <span class="highlight">Telemetry</span></h1>
+        <p class="stats-hero-sub">
+          Real-time network telemetry, global node distribution, hardware infrastructure, and community server analytics across Pumpkin and Vine deployments.
+        </p>
+        <div class="stats-toolbar">
+          <div class="toolbar-meta">
+            <i class="fa-regular fa-clock"></i>
+            <span>Last polled: <strong id="last-updated-text">Connecting...</strong></span>
+          </div>
+          <div class="toolbar-actions">
+            <button type="button" class="refresh-btn" id="refresh-btn" aria-label="Refresh telemetry data">
+              <i class="fa-solid fa-arrows-rotate"></i>
+              <span>Refresh</span>
+            </button>
+            <a
+              href="https://market.pumpkinmc.org/api/docs/"
+              target="_blank"
+              rel="noopener"
+              class="api-docs-btn"
+            >
+              <span>API Docs</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="stats-container">
+        <!-- Metric KPI Cards -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">Active 24h Servers</span>
+              <i class="fa-solid fa-server kpi-icon"></i>
+            </div>
+            <div class="kpi-num" id="kpi-active-servers">-</div>
+            <div class="kpi-sub" id="kpi-live-split"><i class="fa-solid fa-spinner fa-spin"></i></div>
+          </div>
+
+          <div class="kpi-card kpi-vine">
+            <div class="kpi-top">
+              <span class="kpi-label">24h Peak Players</span>
+              <i class="fa-solid fa-users-rays kpi-icon"></i>
+            </div>
+            <div class="kpi-num" id="kpi-peak-players">-</div>
+            <div class="kpi-sub" id="kpi-current-players"><i class="fa-solid fa-spinner fa-spin"></i></div>
+          </div>
+
+          <div class="kpi-card kpi-blue">
+            <div class="kpi-top">
+              <span class="kpi-label">Countries & Regions</span>
+              <i class="fa-solid fa-earth-americas kpi-icon"></i>
+            </div>
+            <div class="kpi-num" id="kpi-total-countries">-</div>
+            <div class="kpi-sub" id="kpi-top-geo"><i class="fa-solid fa-spinner fa-spin"></i></div>
+          </div>
+
+          <div class="kpi-card kpi-yellow">
+            <div class="kpi-top">
+              <span class="kpi-label">Tracked Plugins</span>
+              <i class="fa-solid fa-cube kpi-icon"></i>
+            </div>
+            <div class="kpi-num" id="kpi-total-plugins">-</div>
+            <div class="kpi-sub" id="kpi-plugins-sub"><i class="fa-solid fa-spinner fa-spin"></i></div>
+          </div>
+        </section>
+
+        <!-- Ecosystem Vitals & Efficiency Bar -->
+        <section class="vitals-bar">
+          <div class="vital-item">
+            <span class="vital-title"><i class="fa-solid fa-earth-americas"></i> Global Presence</span>
+            <span class="vital-value" id="vital-countries-span">-</span>
+            <span class="vital-note" id="vital-countries-note">Participating host countries</span>
+          </div>
+          <div class="vital-item">
+            <span class="vital-title"><i class="fa-solid fa-heart-pulse"></i> Node Liveness Rate</span>
+            <span class="vital-value" id="vital-liveness-rate">-</span>
+            <span class="vital-note" id="vital-liveness-note">Responding live right now</span>
+          </div>
+          <div class="vital-item">
+            <span class="vital-title"><i class="fa-solid fa-chart-pie"></i> Load Per Node</span>
+            <span class="vital-value" id="vital-avg-load">-</span>
+            <span class="vital-note" id="vital-avg-load-note">Average online players / server</span>
+          </div>
+          <div class="vital-item">
+            <span class="vital-title"><i class="fa-solid fa-diagram-project"></i> Routing Architecture</span>
+            <span class="vital-value" id="vital-proxy-ratio">-</span>
+            <span class="vital-note" id="vital-proxy-note">Proxy to backend ratio</span>
+          </div>
+        </section>
+
+        <!-- Interactive Global Telemetry World Map -->
+        <section class="stats-section">
+          <div class="section-head">
+            <div>
+              <h2><i class="fa-solid fa-map-location-dot"></i> Global Telemetry Map</h2>
+              <p class="section-head-desc">
+                Geographic distribution of active servers and player traffic across participating host regions.
+              </p>
+            </div>
+            <div class="segmented-control">
+              <button type="button" class="control-btn active" data-map-mode="servers">Servers Density</button>
+              <button type="button" class="control-btn" data-map-mode="players">Player Traffic</button>
+            </div>
+          </div>
+
+          <div class="world-map-card">
+            <div class="map-header">
+              <span class="kpi-label">Active Node Geography</span>
+              <div class="map-legend">
+                <span>Low</span>
+                <span class="legend-bar"></span>
+                <span>High Density</span>
+              </div>
+            </div>
+
+            <div class="map-wrap">
+              <div id="map-container"></div>
+            </div>
+
+            <div class="map-summary-footer">
+              <div class="map-sum-item">
+                <span class="map-sum-label">Top Location</span>
+                <span class="map-sum-val" id="map-stat-top">-</span>
+              </div>
+              <div class="map-sum-item">
+                <span class="map-sum-label">Global Span</span>
+                <span class="map-sum-val" id="map-stat-total">-</span>
+              </div>
+              <div class="map-sum-item">
+                <span class="map-sum-label">Reported Players</span>
+                <span class="map-sum-val" id="map-stat-players">-</span>
+              </div>
+              <div class="map-sum-item">
+                <span class="map-sum-label">Network Density</span>
+                <span class="map-sum-val" id="map-stat-density">-</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 24-Hour Activity Trends -->
+        <section class="stats-section">
+          <div class="section-head">
+            <div>
+              <h2><i class="fa-solid fa-chart-line"></i> 24-Hour Network Trends</h2>
+              <p class="section-head-desc">
+                Hourly activity snapshots comparing peak concurrent players and online server nodes.
+              </p>
+            </div>
+            <div class="segmented-control">
+              <button type="button" class="control-btn active" data-trend-mode="players">Players</button>
+              <button type="button" class="control-btn" data-trend-mode="servers">Servers</button>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <div class="chart-legend" id="chart-legend-players">
+                <div class="legend-item">
+                  <span class="legend-color" style="background: #ff6b2c;"></span>
+                  <span>Online Players</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: #4169e1;"></span>
+                  <span>Peak Players</span>
+                </div>
+              </div>
+              <div class="chart-legend" id="chart-legend-servers" style="display: none;">
+                <div class="legend-item">
+                  <span class="legend-color" style="background: #ff6b2c;"></span>
+                  <span>Total Active</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: #ffd93d;"></span>
+                  <span>Pumpkin</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: #00c853;"></span>
+                  <span>Vine</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-wrap" id="chart-wrap">
+              <svg class="chart-svg" id="chart-svg"></svg>
+              <div class="chart-tooltip" id="chart-tooltip"></div>
+            </div>
+
+            <div class="chart-summary-bar">
+              <div class="chart-sum-item">
+                <span class="sum-label">24h Peak</span>
+                <span class="sum-val" id="chart-sum-peak">-</span>
+              </div>
+              <div class="chart-sum-item">
+                <span class="sum-label">24h Average</span>
+                <span class="sum-val" id="chart-sum-avg">-</span>
+              </div>
+              <div class="chart-sum-item">
+                <span class="sum-label">24h Low</span>
+                <span class="sum-val" id="chart-sum-min">-</span>
+              </div>
+              <div class="chart-sum-item">
+                <span class="sum-label">Current Level</span>
+                <span class="sum-val" id="chart-sum-now">-</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Split Grid: Global Distribution & Top Plugins -->
+        <div class="split-grid">
+          <!-- Geo Distribution -->
+          <section class="stats-section">
+            <div class="section-head">
+              <div>
+                <h2><i class="fa-solid fa-globe"></i> Geographic Breakdown</h2>
+                <p class="section-head-desc">Servers and player traffic categorized by host country.</p>
+              </div>
+              <div class="segmented-control">
+                <button type="button" class="control-btn active" data-geo-sort="servers">Servers</button>
+                <button type="button" class="control-btn" data-geo-sort="players">Players</button>
+              </div>
+            </div>
+            <div class="dist-card featured">
+              <div class="dist-list" id="geo-list">
+                <div style="padding: 1.5rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Plugins Leaderboard -->
+          <section class="stats-section">
+            <div class="section-head">
+              <div>
+                <h2><i class="fa-solid fa-puzzle-piece"></i> Popular Plugins</h2>
+                <p class="section-head-desc">Most adopted plugins and modules across reported servers.</p>
+              </div>
+            </div>
+            <div class="dist-card featured">
+              <div class="dist-list" id="plugins-list">
+                <div style="padding: 1.5rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Systems & Hardware Architecture Breakdown -->
+        <section class="stats-section">
+          <div class="section-head">
+            <div>
+              <h2><i class="fa-solid fa-microchip"></i> System & Hardware Architecture</h2>
+              <p class="section-head-desc">
+                Operating systems, CPU architectures, software versions, and memory footprints reported by server hosts.
+              </p>
+            </div>
+          </div>
+
+          <div class="dist-grid">
+            <!-- Operating Systems -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>Operating Systems</span>
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <div class="dist-list" id="dist-os">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+
+            <!-- CPU Architecture -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>CPU Architecture</span>
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div class="dist-list" id="dist-arch">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+
+            <!-- Software Versions -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>Ecosystem Software Versions</span>
+                <i class="fa-solid fa-code-branch"></i>
+              </div>
+              <div class="dist-list" id="dist-software">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+
+            <!-- Minecraft Versions -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>Minecraft Protocol Support</span>
+                <i class="fa-solid fa-cube"></i>
+              </div>
+              <div class="dist-list" id="dist-mc">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+
+            <!-- RAM Distribution -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>Allocated Server Memory</span>
+                <i class="fa-solid fa-memory"></i>
+              </div>
+              <div class="dist-list" id="dist-ram">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+
+            <!-- Total Host RAM -->
+            <div class="dist-card">
+              <div class="dist-card-head">
+                <span>Host Machine Total RAM</span>
+                <i class="fa-solid fa-hard-drive"></i>
+              </div>
+              <div class="dist-list" id="dist-total-ram">
+                <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Processors Card -->
+          <div class="dist-card" style="margin-top: 1.5rem;">
+            <div class="dist-card-head">
+              <span>Top Server CPU Processors</span>
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <div class="dist-list" id="dist-cpu">
+              <div style="padding: 1rem; text-align: center; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Privacy & Telemetry Info -->
+        <div class="telemetry-info-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div class="telemetry-info-content">
+            <h3>Privacy-Preserving Open Telemetry</h3>
+            <p>
+              Pumpkin and Vine telemetry is completely transparent, non-identifying, and privacy-first. We collect aggregated system metrics (OS, CPU architecture, memory range, software versions, and player counts) to help benchmark performance, optimize multi-threading, and prioritize Minecraft version compatibility.
+              To learn more or integrate your own tools, visit our
+              <a href="https://market.pumpkinmc.org/api/docs/" target="_blank" rel="noopener">Telemetry API Documentation</a>
+              or inspect the telemetry modules in our
+              <a href="https://github.com/Pumpkin-MC/Pumpkin" target="_blank" rel="noopener">GitHub repository</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="../assets/icon.svg" alt="Pumpkin" />
+          <span>Pumpkin</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://docs.pumpkinmc.org/">Documentation</a>
+          <a href="https://github.com/Pumpkin-MC">GitHub</a>
+          <a href="https://discord.com/invite/wT8XjrjKkf">Discord</a>
+          <a href="https://x.com/pumpkinmcdev">X</a>
+          <a href="https://www.youtube.com/@PumpkinServer">YouTube</a>
+          <a href="/donate/">Donate</a>
+          <a href="/stats/">Stats</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        Made with <i class="fa-solid fa-heart" style="color: var(--color-orange);"></i> by <a href="https://marshall.dev" target="_blank" rel="noopener">purdze</a> · Licensed under GPL
+      </div>
+    </footer>
+  </body>
+</html>

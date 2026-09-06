@@ -131,11 +131,15 @@ nav a::after {
   transition: width 0.15s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a.active,
+nav a[aria-current="page"] {
   color: var(--color-text);
 }
 
-nav a:hover::after {
+nav a:hover::after,
+nav a.active::after,
+nav a[aria-current="page"]::after {
   width: 100%;
 }
 
