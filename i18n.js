@@ -104,6 +104,8 @@
       applyTranslations();
       document.documentElement.lang = DEFAULT_LANG;
       updateLangSelectorUI(DEFAULT_LANG);
+      // Notify page-specific scripts so dynamic labels also fall back to English
+      window.dispatchEvent(new CustomEvent("pumpkin-lang-change", { detail: { lang: DEFAULT_LANG } }));
     }
   }
 
