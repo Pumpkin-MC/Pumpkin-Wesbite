@@ -140,26 +140,26 @@
       <section class="dev-hero">
         <div class="dev-hero-content">
           <h1>
-            Build plugins<br />without the <span class="highlight">pain.</span>
+            <span data-i18n="dev.heroTitle">Build plugins</span><br /><span data-i18n="dev.heroTitleSub">without the</span> <span class="highlight" data-i18n="dev.heroTitleHighlight">pain.</span>
           </h1>
           <p>
-            <span class="strikethrough"
+            <span class="strikethrough" data-i18n="dev.heroStrike"
               >No NMS. No reflection. No version-specific hacks.</span
             >
-            Just clean, type-safe APIs.
+            <span data-i18n="dev.heroClean">Just clean, type-safe APIs.</span>
           </p>
           <div class="dev-hero-btns">
             <a
               href="https://docs.pumpkinmc.org/"
               class="btn btn-primary btn-large"
             >
-              Read the Docs <i class="fa-solid fa-arrow-right"></i>
+              <span data-i18n="dev.readDocs">Read the Docs</span> <i class="fa-solid fa-arrow-right"></i>
             </a>
             <a
               href="https://github.com/Pumpkin-MC/Pumpkin"
               class="btn btn-secondary btn-large"
             >
-              <i class="fa-brands fa-github"></i> Source
+              <i class="fa-brands fa-github"></i> <span data-i18n="dev.source">Source</span>
             </a>
           </div>
         </div>
@@ -246,8 +246,8 @@ if let Some(java) = player.as_java() {
       <section class="dev-features">
         <div class="dev-feature">
           <div class="dev-feature-icon"><i class="fa-solid fa-globe"></i></div>
-          <h3>Every Player, One Plugin</h3>
-          <p>
+          <h3 data-i18n="dev.feat1Title">Every Player, One Plugin</h3>
+          <p data-i18n="dev.feat1Desc">
             Native Java + Bedrock support. Multi-version built in. Write once,
             reach everyone.
           </p>
@@ -256,16 +256,16 @@ if let Some(java) = player.as_java() {
           <div class="dev-feature-icon">
             <i class="fa-solid fa-network-wired"></i>
           </div>
-          <h3>Typed Commands &amp; Events</h3>
-          <p>
+          <h3 data-i18n="dev.feat2Title">Typed Commands &amp; Events</h3>
+          <p data-i18n="dev.feat2Desc">
             Register commands and hook typed plugin events without reflection,
             NMS, or version-specific hacks.
           </p>
         </div>
         <div class="dev-feature">
           <div class="dev-feature-icon"><i class="fa-solid fa-bolt"></i></div>
-          <h3>Async by Default</h3>
-          <p>
+          <h3 data-i18n="dev.feat3Title">Async by Default</h3>
+          <p data-i18n="dev.feat3Desc">
             Built on Tokio. No main thread bottleneck. Heavy tasks don't freeze
             the server.
           </p>
@@ -274,8 +274,8 @@ if let Some(java) = player.as_java() {
           <div class="dev-feature-icon">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
-          <h3>Memory Safe</h3>
-          <p>
+          <h3 data-i18n="dev.feat4Title">Memory Safe</h3>
+          <p data-i18n="dev.feat4Desc">
             Rust guarantees. No null pointers, no memory leaks, no data races.
           </p>
         </div>
@@ -299,7 +299,7 @@ if let Some(java) = player.as_java() {
       <section class="dev-guide">
         <div class="guide-container">
           <div class="guide-header">
-            <h2>Quick Start Guide</h2>
+            <h2 data-i18n="dev.guideTitle">Quick Start Guide</h2>
             <div class="lang-selector">
               <button class="lang-btn active" data-lang="rust">
                 <i class="fa-brands fa-rust"></i> Rust
@@ -655,17 +655,18 @@ class MetadataImpl {
       </section>
 
       <section class="dev-cta">
-        <h2>Ready to build?</h2>
+        <h2 data-i18n="dev.ctaTitle">Ready to build?</h2>
         <div class="dev-cta-btns">
           <a
             href="https://docs.pumpkinmc.org/"
             class="btn btn-primary btn-large"
+            data-i18n="dev.ctaGetStarted"
             >Get Started</a
           >
           <a
             href="https://discord.com/invite/wT8XjrjKkf"
             class="btn btn-secondary btn-large"
-            ><i class="fa-brands fa-discord"></i> Discord</a
+            ><i class="fa-brands fa-discord"></i> <span data-i18n="dev.ctaDiscord">Discord</span></a
           >
         </div>
       </section>
@@ -678,15 +679,16 @@ class MetadataImpl {
           <span>Pumpkin</span>
         </div>
         <div class="footer-links">
-          <a href="https://docs.pumpkinmc.org/">Documentation</a>
+          <a href="https://docs.pumpkinmc.org/" data-i18n="footer.docs">Documentation</a>
           <a href="https://github.com/Pumpkin-MC">GitHub</a>
           <a href="https://discord.com/invite/wT8XjrjKkf">Discord</a>
           <a href="https://x.com/pumpkinmcdev">X</a>
           <a href="https://www.youtube.com/@PumpkinServer">YouTube</a>
-          <a href="/donate/">Donate</a>
-          <a href="/stats/">Stats</a>
-          </div>
-          </div>      <div class="footer-bottom">Made with ❤️ by <a href="https://marshall.dev" target="_blank" rel="noopener">purdze</a> · Licensed under GPL</div>
+          <a href="/donate/" data-i18n="footer.donate">Donate</a>
+          <a href="/stats/" data-i18n="nav.stats">Stats</a>
+        </div>
+      </div>
+      <div class="footer-bottom">Made with ❤️ by <a href="https://marshall.dev" target="_blank" rel="noopener">purdze</a> · Licensed under GPL</div>
     </footer>
     <script>
       document.querySelectorAll(".lang-btn").forEach((btn) => {

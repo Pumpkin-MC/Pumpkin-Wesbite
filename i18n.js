@@ -4,10 +4,37 @@
     en: "English",
     de: "Deutsch",
     fr: "Français",
-    es: "Español"
+    es: "Español",
+    pl: "Polski"
   };
 
   let translations = {};
+  let fallbackTranslations = {};
+  let defaultsInitialized = false;
+
+  function getBasePath() {
+    const isSubdir = window.location.pathname.includes("/developers/") ||
+                     window.location.pathname.includes("/download/") ||
+                     window.location.pathname.includes("/donate/") ||
+                     window.location.pathname.includes("/contributors/") ||
+                     window.location.pathname.includes("/stats/");
+    return isSubdir ? "../locales/" : "locales/";
+  }
+
+  // Record initial English texts from the HTML DOM before any translations are applied
+  function initDefaultTexts() {
+    if (defaultsInitialized) return;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      if (el.dataset.i18nDefault === undefined) {
+        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+          el.dataset.i18nDefault = el.placeholder || "";
+        } else {
+          el.dataset.i18nDefault = el.textContent || "";
+        }
+      }
+    });
+    defaultsInitialized = true;
+  }
 
   // Auto-detect browser language or read saved preference
   function detectInitialLang() {
@@ -16,7 +43,6 @@
       return saved;
     }
 
-    // Auto-detect from navigator.languages / navigator.language
     const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || "en"];
     for (let lang of browserLangs) {
       if (!lang) continue;
@@ -33,32 +59,59 @@
     localStorage.setItem("pumpkin_lang", lang);
   }
 
-  async function loadTranslations(lang) {
+  // Load English fallback dictionary
+  async function loadFallbackTranslations() {
+    if (Object.keys(fallbackTranslations).length > 0) {
+      return fallbackTranslations;
+    }
     try {
-      const isSubdir = window.location.pathname.includes("/developers/") ||
-                        window.location.pathname.includes("/download/") ||
-                        window.location.pathname.includes("/donate/") ||
-                        window.location.pathname.includes("/contributors/") ||
-                        window.location.pathname.includes("/stats/");
-      const basePath = isSubdir ? "../locales/" : "locales/";
+      const res = await fetch(`${getBasePath()}en.json`);
+      if (res.ok) {
+        fallbackTranslations = await res.json();
+      }
+    } catch (err) {
+      console.warn("Could not load English fallback locale:", err);
+    }
+    return fallbackTranslations;
+  }
 
-      const res = await fetch(`${basePath}${lang}.json`);
-      if (!res.ok) throw new Error(`Could not load ${lang} locale from ${basePath}${lang}.json`);
-      translations = await res.json();
+  async function loadTranslations(lang) {
+    initDefaultTexts();
+
+    try {
+      // Ensure English fallback is loaded
+      await loadFallbackTranslations();
+
+      if (lang === DEFAULT_LANG) {
+        translations = fallbackTranslations;
+      } else {
+        const res = await fetch(`${getBasePath()}${lang}.json`);
+        if (!res.ok) throw new Error(`Could not load ${lang} locale from ${getBasePath()}${lang}.json`);
+        translations = await res.json();
+      }
+
       applyTranslations();
       document.documentElement.lang = lang;
       updateLangSelectorUI(lang);
       updateSEOMeta(lang);
+
+      // Notify any page-specific scripts of language change
+      window.dispatchEvent(new CustomEvent("pumpkin-lang-change", { detail: { lang } }));
     } catch (err) {
       console.warn("i18n translation load error:", err);
+      // On error, fallback to English
+      translations = fallbackTranslations;
+      applyTranslations();
+      document.documentElement.lang = DEFAULT_LANG;
+      updateLangSelectorUI(DEFAULT_LANG);
+      // Notify page-specific scripts so dynamic labels also fall back to English
+      window.dispatchEvent(new CustomEvent("pumpkin-lang-change", { detail: { lang: DEFAULT_LANG } }));
     }
   }
 
   function updateSEOMeta(lang) {
-    // Dynamically manage hreflang tags for SEO
     let baseCanonical = window.location.origin + window.location.pathname;
     
-    // Remove existing hreflang tags
     document.querySelectorAll("link[rel='alternate'][hreflang]").forEach(el => el.remove());
 
     Object.keys(SUPPORTED_LANGS).forEach(code => {
@@ -76,16 +129,34 @@
     document.head.appendChild(xDefault);
   }
 
-  function getNestedTranslation(key) {
-    return key.split(".").reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : null), translations);
+  function getNestedTranslation(key, dict) {
+    if (!dict) return null;
+    return key.split(".").reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : null), dict);
+  }
+
+  function resolveTranslation(key, el) {
+    // 1. Try active language
+    let val = getNestedTranslation(key, translations);
+    if (val !== null && val !== undefined && val !== "") return val;
+
+    // 2. Fallback to English dictionary
+    val = getNestedTranslation(key, fallbackTranslations);
+    if (val !== null && val !== undefined && val !== "") return val;
+
+    // 3. Fallback to original text from HTML markup
+    if (el && el.dataset.i18nDefault !== undefined && el.dataset.i18nDefault !== "") {
+      return el.dataset.i18nDefault;
+    }
+
+    return null;
   }
 
   function applyTranslations() {
     const elements = document.querySelectorAll("[data-i18n]");
     elements.forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      const val = getNestedTranslation(key);
-      if (val !== null) {
+      const val = resolveTranslation(key, el);
+      if (val !== null && val !== undefined) {
         if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
           el.placeholder = val;
         } else {
@@ -106,7 +177,7 @@
     const currentLang = detectInitialLang();
 
     container.innerHTML = `
-      <button class="icon-btn lang-toggle-btn" type="button" title="Language / Sprachauswahl" aria-label="Change language">
+      <button class="icon-btn lang-toggle-btn" type="button" title="Language" aria-label="Change language">
         <i class="fa-solid fa-globe"></i>
         <span class="current-lang-code">${currentLang.toUpperCase()}</span>
       </button>
@@ -163,6 +234,7 @@
   }
 
   function init() {
+    initDefaultTexts();
     buildLangDropdown();
     const initialLang = detectInitialLang();
     loadTranslations(initialLang);

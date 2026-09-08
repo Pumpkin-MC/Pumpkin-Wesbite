@@ -10,7 +10,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-    <title>Telemetry & Stats - Pumpkin</title>
+    <title data-i18n="stats.pageTitle">Telemetry & Stats - Pumpkin</title>
     <meta
       name="description"
       content="Live ecosystem telemetry, server health, hardware distribution, global world map, and community statistics for Pumpkin and Vine."
@@ -149,21 +149,21 @@
       <section class="stats-hero">
         <div class="hero-status-pill">
           <span class="live-pulse-dot"></span>
-          <span>Live Ecosystem Telemetry</span>
+          <span data-i18n="stats.heroPill">Live Ecosystem Telemetry</span>
         </div>
-        <h1>Ecosystem <span class="highlight">Telemetry</span></h1>
-        <p class="stats-hero-sub">
+        <h1><span data-i18n="stats.heroTitlePart1">Ecosystem</span> <span class="highlight" data-i18n="stats.heroTitleHighlight">Telemetry</span></h1>
+        <p class="stats-hero-sub" data-i18n="stats.heroSub">
           Real-time network telemetry, global node distribution, hardware infrastructure, and community server analytics across Pumpkin and Vine deployments.
         </p>
         <div class="stats-toolbar">
           <div class="toolbar-meta">
             <i class="fa-regular fa-clock"></i>
-            <span>Last polled: <strong id="last-updated-text">Connecting...</strong></span>
+            <span><span data-i18n="stats.lastPolled">Last polled:</span> <strong id="last-updated-text" data-i18n="stats.connecting">Connecting...</strong></span>
           </div>
           <div class="toolbar-actions">
             <button type="button" class="refresh-btn" id="refresh-btn" aria-label="Refresh telemetry data">
               <i class="fa-solid fa-arrows-rotate"></i>
-              <span>Refresh</span>
+              <span data-i18n="stats.refresh">Refresh</span>
             </button>
             <a
               href="https://market.pumpkinmc.org/api/docs/"
@@ -171,7 +171,7 @@
               rel="noopener"
               class="api-docs-btn"
             >
-              <span>API Docs</span>
+              <span data-i18n="stats.apiDocs">API Docs</span>
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
@@ -183,7 +183,7 @@
         <section class="kpi-grid">
           <div class="kpi-card">
             <div class="kpi-top">
-              <span class="kpi-label">Active 24h Servers</span>
+              <span class="kpi-label" data-i18n="stats.kpiActiveServers">Active 24h Servers</span>
               <i class="fa-solid fa-server kpi-icon"></i>
             </div>
             <div class="kpi-num" id="kpi-active-servers">-</div>
@@ -192,7 +192,7 @@
 
           <div class="kpi-card kpi-vine">
             <div class="kpi-top">
-              <span class="kpi-label">24h Peak Players</span>
+              <span class="kpi-label" data-i18n="stats.kpiPeakPlayers">24h Peak Players</span>
               <i class="fa-solid fa-users-rays kpi-icon"></i>
             </div>
             <div class="kpi-num" id="kpi-peak-players">-</div>
@@ -201,7 +201,7 @@
 
           <div class="kpi-card kpi-blue">
             <div class="kpi-top">
-              <span class="kpi-label">Countries & Regions</span>
+              <span class="kpi-label" data-i18n="stats.kpiCountries">Countries & Regions</span>
               <i class="fa-solid fa-earth-americas kpi-icon"></i>
             </div>
             <div class="kpi-num" id="kpi-total-countries">-</div>
@@ -210,7 +210,7 @@
 
           <div class="kpi-card kpi-yellow">
             <div class="kpi-top">
-              <span class="kpi-label">Tracked Plugins</span>
+              <span class="kpi-label" data-i18n="stats.kpiTrackedPlugins">Tracked Plugins</span>
               <i class="fa-solid fa-cube kpi-icon"></i>
             </div>
             <div class="kpi-num" id="kpi-total-plugins">-</div>
@@ -221,24 +221,24 @@
         <!-- Ecosystem Vitals & Efficiency Bar -->
         <section class="vitals-bar">
           <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-earth-americas"></i> Global Presence</span>
+            <span class="vital-title"><i class="fa-solid fa-earth-americas"></i> <span data-i18n="stats.vitalGlobalPresence">Global Presence</span></span>
             <span class="vital-value" id="vital-countries-span">-</span>
-            <span class="vital-note" id="vital-countries-note">Participating host countries</span>
+            <span class="vital-note" id="vital-countries-note" data-i18n="stats.vitalCountriesNote">Participating host countries</span>
           </div>
           <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-heart-pulse"></i> Node Liveness Rate</span>
+            <span class="vital-title"><i class="fa-solid fa-heart-pulse"></i> <span data-i18n="stats.vitalLiveness">Node Liveness Rate</span></span>
             <span class="vital-value" id="vital-liveness-rate">-</span>
-            <span class="vital-note" id="vital-liveness-note">Responding live right now</span>
+            <span class="vital-note" id="vital-liveness-note" data-i18n="stats.vitalLivenessNote">Responding live right now</span>
           </div>
           <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-chart-pie"></i> Load Per Node</span>
+            <span class="vital-title"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="stats.vitalLoad">Load Per Node</span></span>
             <span class="vital-value" id="vital-avg-load">-</span>
-            <span class="vital-note" id="vital-avg-load-note">Average online players / server</span>
+            <span class="vital-note" id="vital-avg-load-note" data-i18n="stats.vitalLoadNote">Average online players / server</span>
           </div>
           <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-diagram-project"></i> Routing Architecture</span>
+            <span class="vital-title"><i class="fa-solid fa-diagram-project"></i> <span data-i18n="stats.vitalRouting">Routing Architecture</span></span>
             <span class="vital-value" id="vital-proxy-ratio">-</span>
-            <span class="vital-note" id="vital-proxy-note">Proxy to backend ratio</span>
+            <span class="vital-note" id="vital-proxy-note" data-i18n="stats.vitalRoutingNote">Proxy to backend ratio</span>
           </div>
         </section>
 
@@ -246,24 +246,24 @@
         <section class="stats-section">
           <div class="section-head">
             <div>
-              <h2><i class="fa-solid fa-map-location-dot"></i> Global Telemetry Map</h2>
-              <p class="section-head-desc">
+              <h2><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="stats.mapTitle">Global Telemetry Map</span></h2>
+              <p class="section-head-desc" data-i18n="stats.mapDesc">
                 Geographic distribution of active servers and player traffic across participating host regions.
               </p>
             </div>
             <div class="segmented-control">
-              <button type="button" class="control-btn active" data-map-mode="servers">Servers Density</button>
-              <button type="button" class="control-btn" data-map-mode="players">Player Traffic</button>
+              <button type="button" class="control-btn active" data-map-mode="servers" data-i18n="stats.mapServersBtn">Servers Density</button>
+              <button type="button" class="control-btn" data-map-mode="players" data-i18n="stats.mapPlayersBtn">Player Traffic</button>
             </div>
           </div>
 
           <div class="world-map-card">
             <div class="map-header">
-              <span class="kpi-label">Active Node Geography</span>
+              <span class="kpi-label" data-i18n="stats.mapGeography">Active Node Geography</span>
               <div class="map-legend">
-                <span>Low</span>
+                <span data-i18n="stats.mapLow">Low</span>
                 <span class="legend-bar"></span>
-                <span>High Density</span>
+                <span data-i18n="stats.mapHigh">High Density</span>
               </div>
             </div>
 
@@ -273,19 +273,19 @@
 
             <div class="map-summary-footer">
               <div class="map-sum-item">
-                <span class="map-sum-label">Top Location</span>
+                <span class="map-sum-label" data-i18n="stats.mapTopLocation">Top Location</span>
                 <span class="map-sum-val" id="map-stat-top">-</span>
               </div>
               <div class="map-sum-item">
-                <span class="map-sum-label">Global Span</span>
+                <span class="map-sum-label" data-i18n="stats.mapGlobalSpan">Global Span</span>
                 <span class="map-sum-val" id="map-stat-total">-</span>
               </div>
               <div class="map-sum-item">
-                <span class="map-sum-label">Reported Players</span>
+                <span class="map-sum-label" data-i18n="stats.mapReportedPlayers">Reported Players</span>
                 <span class="map-sum-val" id="map-stat-players">-</span>
               </div>
               <div class="map-sum-item">
-                <span class="map-sum-label">Network Density</span>
+                <span class="map-sum-label" data-i18n="stats.mapNetworkDensity">Network Density</span>
                 <span class="map-sum-val" id="map-stat-density">-</span>
               </div>
             </div>
@@ -296,14 +296,14 @@
         <section class="stats-section">
           <div class="section-head">
             <div>
-              <h2><i class="fa-solid fa-chart-line"></i> 24-Hour Network Trends</h2>
-              <p class="section-head-desc">
+              <h2><i class="fa-solid fa-chart-line"></i> <span data-i18n="stats.trendsTitle">24-Hour Network Trends</span></h2>
+              <p class="section-head-desc" data-i18n="stats.trendsDesc">
                 Hourly activity snapshots comparing peak concurrent players and online server nodes.
               </p>
             </div>
             <div class="segmented-control">
-              <button type="button" class="control-btn active" data-trend-mode="players">Players</button>
-              <button type="button" class="control-btn" data-trend-mode="servers">Servers</button>
+              <button type="button" class="control-btn active" data-trend-mode="players" data-i18n="stats.trendsPlayersBtn">Players</button>
+              <button type="button" class="control-btn" data-trend-mode="servers" data-i18n="stats.trendsServersBtn">Servers</button>
             </div>
           </div>
 
@@ -312,25 +312,25 @@
               <div class="chart-legend" id="chart-legend-players">
                 <div class="legend-item">
                   <span class="legend-color" style="background: #ff6b2c;"></span>
-                  <span>Online Players</span>
+                  <span data-i18n="stats.legendOnline">Online Players</span>
                 </div>
                 <div class="legend-item">
                   <span class="legend-color" style="background: #4169e1;"></span>
-                  <span>Peak Players</span>
+                  <span data-i18n="stats.legendPeak">Peak Players</span>
                 </div>
               </div>
               <div class="chart-legend" id="chart-legend-servers" style="display: none;">
                 <div class="legend-item">
                   <span class="legend-color" style="background: #ff6b2c;"></span>
-                  <span>Total Active</span>
+                  <span data-i18n="stats.legendTotalActive">Total Active</span>
                 </div>
                 <div class="legend-item">
                   <span class="legend-color" style="background: #ffd93d;"></span>
-                  <span>Pumpkin</span>
+                  <span data-i18n="stats.legendPumpkin">Pumpkin</span>
                 </div>
                 <div class="legend-item">
                   <span class="legend-color" style="background: #00c853;"></span>
-                  <span>Vine</span>
+                  <span data-i18n="stats.legendVine">Vine</span>
                 </div>
               </div>
             </div>
@@ -342,19 +342,19 @@
 
             <div class="chart-summary-bar">
               <div class="chart-sum-item">
-                <span class="sum-label">24h Peak</span>
+                <span class="sum-label" data-i18n="stats.sumPeak">24h Peak</span>
                 <span class="sum-val" id="chart-sum-peak">-</span>
               </div>
               <div class="chart-sum-item">
-                <span class="sum-label">24h Average</span>
+                <span class="sum-label" data-i18n="stats.sumAvg">24h Average</span>
                 <span class="sum-val" id="chart-sum-avg">-</span>
               </div>
               <div class="chart-sum-item">
-                <span class="sum-label">24h Low</span>
+                <span class="sum-label" data-i18n="stats.sumLow">24h Low</span>
                 <span class="sum-val" id="chart-sum-min">-</span>
               </div>
               <div class="chart-sum-item">
-                <span class="sum-label">Current Level</span>
+                <span class="sum-label" data-i18n="stats.sumNow">Current Level</span>
                 <span class="sum-val" id="chart-sum-now">-</span>
               </div>
             </div>
@@ -367,12 +367,12 @@
           <section class="stats-section">
             <div class="section-head">
               <div>
-                <h2><i class="fa-solid fa-globe"></i> Geographic Breakdown</h2>
-                <p class="section-head-desc">Servers and player traffic categorized by host country.</p>
+                <h2><i class="fa-solid fa-globe"></i> <span data-i18n="stats.geoTitle">Geographic Breakdown</span></h2>
+                <p class="section-head-desc" data-i18n="stats.geoDesc">Servers and player traffic categorized by host country.</p>
               </div>
               <div class="segmented-control">
-                <button type="button" class="control-btn active" data-geo-sort="servers">Servers</button>
-                <button type="button" class="control-btn" data-geo-sort="players">Players</button>
+                <button type="button" class="control-btn active" data-geo-sort="servers" data-i18n="stats.geoServersBtn">Servers</button>
+                <button type="button" class="control-btn" data-geo-sort="players" data-i18n="stats.geoPlayersBtn">Players</button>
               </div>
             </div>
             <div class="dist-card featured">
@@ -386,8 +386,8 @@
           <section class="stats-section">
             <div class="section-head">
               <div>
-                <h2><i class="fa-solid fa-puzzle-piece"></i> Popular Plugins</h2>
-                <p class="section-head-desc">Most adopted plugins and modules across reported servers.</p>
+                <h2><i class="fa-solid fa-puzzle-piece"></i> <span data-i18n="stats.pluginsTitle">Popular Plugins</span></h2>
+                <p class="section-head-desc" data-i18n="stats.pluginsDesc">Most adopted plugins and modules across reported servers.</p>
               </div>
             </div>
             <div class="dist-card featured">
@@ -402,8 +402,8 @@
         <section class="stats-section">
           <div class="section-head">
             <div>
-              <h2><i class="fa-solid fa-microchip"></i> System & Hardware Architecture</h2>
-              <p class="section-head-desc">
+              <h2><i class="fa-solid fa-microchip"></i> <span data-i18n="stats.hwTitle">System & Hardware Architecture</span></h2>
+              <p class="section-head-desc" data-i18n="stats.hwDesc">
                 Operating systems, CPU architectures, software versions, and memory footprints reported by server hosts.
               </p>
             </div>
@@ -413,7 +413,7 @@
             <!-- Operating Systems -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>Operating Systems</span>
+                <span data-i18n="stats.hwOS">Operating Systems</span>
                 <i class="fa-solid fa-laptop-code"></i>
               </div>
               <div class="dist-list" id="dist-os">
@@ -424,7 +424,7 @@
             <!-- CPU Architecture -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>CPU Architecture</span>
+                <span data-i18n="stats.hwArch">CPU Architecture</span>
                 <i class="fa-solid fa-bolt"></i>
               </div>
               <div class="dist-list" id="dist-arch">
@@ -435,7 +435,7 @@
             <!-- Software Versions -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>Ecosystem Software Versions</span>
+                <span data-i18n="stats.hwSoftware">Ecosystem Software Versions</span>
                 <i class="fa-solid fa-code-branch"></i>
               </div>
               <div class="dist-list" id="dist-software">
@@ -446,7 +446,7 @@
             <!-- Minecraft Versions -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>Minecraft Protocol Support</span>
+                <span data-i18n="stats.hwMC">Minecraft Protocol Support</span>
                 <i class="fa-solid fa-cube"></i>
               </div>
               <div class="dist-list" id="dist-mc">
@@ -457,7 +457,7 @@
             <!-- RAM Distribution -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>Allocated Server Memory</span>
+                <span data-i18n="stats.hwRam">Allocated Server Memory</span>
                 <i class="fa-solid fa-memory"></i>
               </div>
               <div class="dist-list" id="dist-ram">
@@ -468,7 +468,7 @@
             <!-- Total Host RAM -->
             <div class="dist-card">
               <div class="dist-card-head">
-                <span>Host Machine Total RAM</span>
+                <span data-i18n="stats.hwTotalRam">Host Machine Total RAM</span>
                 <i class="fa-solid fa-hard-drive"></i>
               </div>
               <div class="dist-list" id="dist-total-ram">
@@ -480,7 +480,7 @@
           <!-- Processors Card -->
           <div class="dist-card" style="margin-top: 1.5rem;">
             <div class="dist-card-head">
-              <span>Top Server CPU Processors</span>
+              <span data-i18n="stats.hwCpu">Top Server CPU Processors</span>
               <i class="fa-solid fa-server"></i>
             </div>
             <div class="dist-list" id="dist-cpu">
@@ -493,13 +493,12 @@
         <div class="telemetry-info-card">
           <i class="fa-solid fa-shield-halved"></i>
           <div class="telemetry-info-content">
-            <h3>Privacy-Preserving Open Telemetry</h3>
+            <h3 data-i18n="stats.privacyTitle">Privacy-Preserving Open Telemetry</h3>
             <p>
-              Pumpkin and Vine telemetry is completely transparent, non-identifying, and privacy-first. We collect aggregated system metrics (OS, CPU architecture, memory range, software versions, and player counts) to help benchmark performance, optimize multi-threading, and prioritize Minecraft version compatibility.
-              To learn more or integrate your own tools, visit our
-              <a href="https://market.pumpkinmc.org/api/docs/" target="_blank" rel="noopener">Telemetry API Documentation</a>
-              or inspect the telemetry modules in our
-              <a href="https://github.com/Pumpkin-MC/Pumpkin" target="_blank" rel="noopener">GitHub repository</a>.
+              <span data-i18n="stats.privacyText1">Pumpkin and Vine telemetry is completely transparent, non-identifying, and privacy-first. We collect aggregated system metrics (OS, CPU architecture, memory range, software versions, and player counts) to help benchmark performance, optimize multi-threading, and prioritize Minecraft version compatibility. To learn more or integrate your own tools, visit our</span>
+              <a href="https://market.pumpkinmc.org/api/docs/" target="_blank" rel="noopener" data-i18n="stats.privacyLinkApi">Telemetry API Documentation</a>
+              <span data-i18n="stats.privacyTextMid">or inspect the telemetry modules in our</span>
+              <a href="https://github.com/Pumpkin-MC/Pumpkin" target="_blank" rel="noopener" data-i18n="stats.privacyLinkGithub">GitHub repository</a><span data-i18n="stats.privacyTextEnd">.</span>
             </p>
           </div>
         </div>
@@ -513,13 +512,13 @@
           <span>Pumpkin</span>
         </div>
         <div class="footer-links">
-          <a href="https://docs.pumpkinmc.org/">Documentation</a>
+          <a href="https://docs.pumpkinmc.org/" data-i18n="footer.docs">Documentation</a>
           <a href="https://github.com/Pumpkin-MC">GitHub</a>
           <a href="https://discord.com/invite/wT8XjrjKkf">Discord</a>
           <a href="https://x.com/pumpkinmcdev">X</a>
           <a href="https://www.youtube.com/@PumpkinServer">YouTube</a>
-          <a href="/donate/">Donate</a>
-          <a href="/stats/">Stats</a>
+          <a href="/donate/" data-i18n="footer.donate">Donate</a>
+          <a href="/stats/" data-i18n="nav.stats">Stats</a>
         </div>
       </div>
       <div class="footer-bottom">

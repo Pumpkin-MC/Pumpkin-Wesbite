@@ -139,9 +139,9 @@
     <main>
       <section class="download-hero">
         <h1 class="section-title">
-          <span class="highlight">Download</span> Pumpkin
+          <span class="highlight" data-i18n="download.heroTitleHighlight">Download</span> <span data-i18n="download.heroTitle">Pumpkin</span>
         </h1>
-        <p>
+        <p data-i18n="download.heroSubtitle">
           Self-contained executable. No Java required. Just download, run, and
           play.
         </p>
@@ -150,12 +150,12 @@
         <div class="auto-download">
           <a id="auto-download-btn" href="https://github.com/Pumpkin-MC/Pumpkin/releases/latest/download/pumpkin-X64-Windows.exe" class="btn btn-primary btn-xl">
             <i id="auto-download-icon" class="fab fa-windows"></i>
-            <span id="auto-download-text">Download for Windows</span>
+            <span id="auto-download-text" data-i18n="download.autoDownloadBtn">Download for Windows</span>
             <i class="fa-solid fa-download"></i>
           </a>
           <p class="auto-download-meta">
             <span id="auto-download-arch">x86-64</span> &bull;
-            <span id="auto-download-build">Version: <a href="https://github.com/Pumpkin-MC/Pumpkin/releases/tag/0.1.0-dev%2B26.2-26.45" target="_blank" rel="noopener">0.1.0-dev+26.2-26.45</a></span>
+            <span id="auto-download-build"><span id="version-label">Version: </span><a href="https://github.com/Pumpkin-MC/Pumpkin/releases/tag/0.1.0-dev%2B26.2-26.45" target="_blank" rel="noopener">0.1.0-dev+26.2-26.45</a></span>
           </p>
         </div>
 
@@ -163,7 +163,7 @@
         <div class="oneliner-section">
           <p class="oneliner-label">
             <i class="fa-solid fa-terminal"></i>
-            If you're on macOS, Linux, or another Unix-like OS, run the following in your terminal to install Pumpkin:
+            <span data-i18n="download.onelinerLabel">If you're on macOS, Linux, or another Unix-like OS, run the following in your terminal to install Pumpkin:</span>
           </p>
           <div class="oneliner-row">
             <code class="oneliner-code" id="oneliner-code">curl -sSfL https://pumpkinmc.org/install.sh | sh</code>
@@ -173,7 +173,7 @@
           </div>
         </div>
 
-        <h2 id="all-downloads" class="downloads-heading">All Platforms</h2>
+        <h2 id="all-downloads" class="downloads-heading" data-i18n="download.allPlatforms">All Platforms</h2>
 
         <div class="download-grid">
           <div class="platform-btn" data-href-primary="https://github.com/Pumpkin-MC/Pumpkin/releases/latest/download/pumpkin-X64-Windows.exe">
@@ -236,7 +236,7 @@
         </div>
 
         <p class="download-note">
-          Need older versions? Check
+          <span data-i18n="download.needOlder">Need older versions? Check</span>
           <a
             href="https://github.com/Pumpkin-MC/Pumpkin/releases"
             target="_blank"
@@ -250,20 +250,20 @@
       <section class="quickstart">
         <div class="quickstart-content">
           <div class="quickstart-text">
-            <h2>Get Started in Seconds</h2>
-            <p>
+            <h2 data-i18n="download.quickstartTitle">Get Started in Seconds</h2>
+            <p data-i18n="download.quickstartDesc">
               Download the executable, double-click, and your server is running.
               Check the docs for configuration options.
             </p>
             <div class="quickstart-buttons">
               <a href="https://docs.pumpkinmc.org/" class="btn btn-primary">
-                Quick Start Guide <i class="fa-solid fa-arrow-right"></i>
+                <span data-i18n="download.quickstartGuide">Quick Start Guide</span> <i class="fa-solid fa-arrow-right"></i>
               </a>
               <a
                 href="https://discord.com/invite/wT8XjrjKkf"
                 class="btn btn-secondary"
               >
-                <i class="fab fa-discord"></i> Get Help
+                <i class="fab fa-discord"></i> <span data-i18n="download.getHelp">Get Help</span>
               </a>
             </div>
           </div>
@@ -299,15 +299,16 @@
           <span>Pumpkin</span>
         </div>
         <div class="footer-links">
-          <a href="https://docs.pumpkinmc.org/">Documentation</a>
+          <a href="https://docs.pumpkinmc.org/" data-i18n="footer.docs">Documentation</a>
           <a href="https://github.com/Pumpkin-MC">GitHub</a>
           <a href="https://discord.com/invite/wT8XjrjKkf">Discord</a>
           <a href="https://x.com/pumpkinmcdev">X</a>
           <a href="https://www.youtube.com/@PumpkinServer">YouTube</a>
-          <a href="/donate/">Donate</a>
-          <a href="/stats/">Stats</a>
-          </div>
-          </div>      <div class="footer-bottom">Made with ❤️ by <a href="https://marshall.dev" target="_blank" rel="noopener">purdze</a> · Licensed under GPL</div>
+          <a href="/donate/" data-i18n="footer.donate">Donate</a>
+          <a href="/stats/" data-i18n="nav.stats">Stats</a>
+        </div>
+      </div>
+      <div class="footer-bottom">Made with ❤️ by <a href="https://marshall.dev" target="_blank" rel="noopener">purdze</a> · Licensed under GPL</div>
     </footer>
     <script>
       (function () {
@@ -386,7 +387,8 @@
           (downloads[os] && downloads[os].x64) ||
           "#";
         icon.className = iconClass;
-        text.textContent = "Download for " + osName;
+        const isPl = (localStorage.getItem("pumpkin_lang") || document.documentElement.lang) === "pl";
+        text.textContent = (isPl ? "Pobierz dla " : "Download for ") + osName;
         arch.textContent = archLabel;
 
         // Fetch latest release info
@@ -428,7 +430,8 @@
               : DEFAULT_RELEASE_URL);
 
           if (buildEl) {
-            buildEl.textContent = "Version: ";
+            const currentLang = localStorage.getItem("pumpkin_lang") || document.documentElement.lang;
+            buildEl.textContent = (currentLang === "pl" ? "Wersja: " : "Version: ");
             const versionLink = document.createElement("a");
             versionLink.href = url;
             versionLink.target = "_blank";
@@ -437,6 +440,24 @@
             buildEl.appendChild(versionLink);
           }
         }
+
+        window.addEventListener("pumpkin-lang-change", function (e) {
+          const l = e.detail && e.detail.lang;
+          const isPolish = l === "pl";
+          if (text) text.textContent = (isPolish ? "Pobierz dla " : "Download for ") + osName;
+          if (buildEl) {
+            const versionLink = buildEl.querySelector("a");
+            const versionText = versionLink ? versionLink.textContent : DEFAULT_VERSION;
+            const versionHref = versionLink ? versionLink.href : DEFAULT_RELEASE_URL;
+            buildEl.textContent = isPolish ? "Wersja: " : "Version: ";
+            const newLink = document.createElement("a");
+            newLink.href = versionHref;
+            newLink.target = "_blank";
+            newLink.rel = "noopener";
+            newLink.textContent = versionText;
+            buildEl.appendChild(newLink);
+          }
+        });
 
         try {
           localStorage.removeItem("pumpkin_commit");

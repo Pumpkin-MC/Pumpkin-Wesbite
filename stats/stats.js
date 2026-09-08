@@ -15,6 +15,65 @@
     isLoading: false,
   };
 
+  // Dynamic-string translations for the stats dashboard.
+  // Static markup is translated via data-i18n (i18n.js); everything
+  // rendered here at runtime goes through st()/fmt() so the language
+  // switcher (pumpkin-lang-change) also updates live content.
+  let statsStrings = {};
+
+  function getStatsLang() {
+    try {
+      const saved = localStorage.getItem("pumpkin_lang");
+      if (saved) return saved.toLowerCase().split("-")[0];
+    } catch {
+      // ignore storage errors, fall through to browser detection
+    }
+    const browserLangs = (typeof navigator !== "undefined" && (navigator.languages || [navigator.language])) || ["en"];
+    for (const lang of browserLangs) {
+      if (!lang) continue;
+      const code = String(lang).toLowerCase().split("-")[0];
+      if (code) return code;
+    }
+    return "en";
+  }
+
+  async function loadStatsStrings() {
+    const lang = getStatsLang();
+    const tried = [];
+    if (lang && lang !== "en") tried.push(lang);
+    tried.push("en");
+    for (const code of tried) {
+      try {
+        const res = await fetch(`../locales/${code}.json`);
+        if (!res.ok) continue;
+        const data = await res.json();
+        if (data && data.stats && Object.keys(data.stats).length > 0) {
+          statsStrings = data.stats;
+          return;
+        }
+      } catch {
+        // try next fallback language
+      }
+    }
+    statsStrings = {};
+  }
+
+  function st(key, fallback) {
+    const val = statsStrings[key];
+    if (val !== null && val !== undefined && val !== "") return val;
+    return fallback;
+  }
+
+  function fmt(template, params) {
+    let s = String(template);
+    if (params) {
+      for (const k of Object.keys(params)) {
+        s = s.split(`{${k}}`).join(String(params[k]));
+      }
+    }
+    return s;
+  }
+
   // Format numbers with locale commas
   function formatNumber(num) {
     if (num === null || num === undefined) return "0";
@@ -23,12 +82,13 @@
 
   // Format relative minutes ago
   function formatMinutesAgo(mins) {
-    if (mins === undefined || mins === null) return "Unknown";
-    if (mins <= 1) return "Active just now";
-    if (mins < 60) return `${mins}m ago`;
+    if (mins === undefined || mins === null) return st("unknown", "Unknown");
+    if (mins <= 1) return st("activeJustNow", "Active just now");
+    if (mins < 60) return fmt(st("minutesAgo", "{m}m ago"), { m: mins });
     const hours = Math.floor(mins / 60);
     const rem = mins % 60;
-    return rem > 0 ? `${hours}h ${rem}m ago` : `${hours}h ago`;
+    if (rem > 0) return fmt(st("hoursMinutesAgo", "{h}h {m}m ago"), { h: hours, m: rem });
+    return fmt(st("hoursAgo", "{h}h ago"), { h: hours });
   }
 
   // Format timestamp into clean local time
@@ -43,7 +103,7 @@
   }
 
   function formatFullDateTime(isoStr) {
-    if (!isoStr) return "Never";
+    if (!isoStr) return st("never", "Never");
     try {
       const d = new Date(isoStr);
       return d.toLocaleDateString([], {
@@ -118,7 +178,7 @@
     const timeEl = document.getElementById("last-updated-text");
     if (!timeEl) return;
     if (!state.lastFetchTime) {
-      timeEl.textContent = "Connecting...";
+      timeEl.textContent = st("connecting", "Connecting...");
       return;
     }
     timeEl.textContent = state.lastFetchTime.toLocaleTimeString();
@@ -138,7 +198,7 @@
       liveSplitEl.innerHTML = `
         <span class="badge-tag pumpkin"><span class="node-dot pumpkin-dot"></span> Pumpkin: ${formatNumber(o.live_pumpkin_servers)}</span>
         <span class="badge-tag vine"><span class="node-dot vine-dot"></span> Vine: ${formatNumber(o.live_vine_servers)}</span>
-        <span style="opacity: 0.8; font-size: 0.8rem;">(${formatNumber(o.live_servers)} live now)</span>
+        <span style="opacity: 0.8; font-size: 0.8rem;">(${formatNumber(o.live_servers)} ${st("liveNow", "live now")})</span>
       `;
     }
 
@@ -150,7 +210,7 @@
     if (currentPlayersEl) {
       currentPlayersEl.innerHTML = `
         <i class="fa-solid fa-user-group" style="color: var(--color-green);"></i>
-        <strong>${formatNumber(o.total_online_players)}</strong> online right now
+        <strong>${formatNumber(o.total_online_players)}</strong> ${st("onlineRightNow", "online right now")}
       `;
     }
 
@@ -163,7 +223,7 @@
       if (state.geo && state.geo.length > 0) {
         const topCountry = state.geo[0];
         topGeoEl.innerHTML = `
-          <span>Top region: <span class="iso-badge">${topCountry.country}</span> <strong>${topCountry.country_name}</strong></span>
+          <span>${st("topRegion", "Top region:")} <span class="iso-badge">${topCountry.country}</span> <strong>${topCountry.country_name}</strong></span>
         `;
       } else {
         topGeoEl.textContent = "";
@@ -179,7 +239,7 @@
       if (o.total_tracked_plugins > 0) {
         pluginsSubEl.innerHTML = `
           <i class="fa-solid fa-puzzle-piece" style="color: var(--color-yellow);"></i>
-          <span>${formatNumber(o.total_tracked_plugins)} modules detected</span>
+          <span>${formatNumber(o.total_tracked_plugins)} ${st("modulesDetected", "modules detected")}</span>
         `;
       } else {
         pluginsSubEl.textContent = "";
@@ -197,8 +257,8 @@
     const countriesNote = document.getElementById("vital-countries-note");
     if (countriesEl) countriesEl.textContent = formatNumber(o.total_countries);
     if (countriesNote) {
-      const topCountry = state.geo && state.geo[0] ? `${state.geo[0].country_name} [${state.geo[0].country}]` : "Active nodes";
-      countriesNote.textContent = `Leading: ${topCountry}`;
+      const topCountry = state.geo && state.geo[0] ? `${state.geo[0].country_name} [${state.geo[0].country}]` : st("activeNodes", "Active nodes");
+      countriesNote.textContent = `${st("leading", "Leading:")} ${topCountry}`;
     }
 
     // Node Liveness Rate
@@ -208,7 +268,7 @@
     const liveRateEl = document.getElementById("vital-liveness-rate");
     const liveRateNote = document.getElementById("vital-liveness-note");
     if (liveRateEl) liveRateEl.textContent = `${livenessRate}%`;
-    if (liveRateNote) liveRateNote.textContent = `${o.live_servers} of ${o.active_24h_servers} servers responding now`;
+    if (liveRateNote) liveRateNote.textContent = fmt(st("respondingNow", "{live} of {active} servers responding now"), { live: o.live_servers, active: o.active_24h_servers });
 
     // Average Players Per Node
     const avgLoad = o.active_24h_servers > 0
@@ -221,7 +281,7 @@
       const peakPerNode = o.active_24h_servers > 0
         ? (o.peak_24h_players / o.active_24h_servers).toFixed(1)
         : "0.0";
-      avgLoadNote.textContent = `24h peak: ${peakPerNode} players / node`;
+      avgLoadNote.textContent = fmt(st("peakPerNode", "24h peak: {v} players / node"), { v: peakPerNode });
     }
 
     // Proxy vs Backend Ratio
@@ -238,7 +298,7 @@
       }
     }
     if (proxyRatioNote) {
-      proxyRatioNote.textContent = "Multi-tier network routing";
+      proxyRatioNote.textContent = st("multiTier", "Multi-tier network routing");
     }
   }
 
@@ -249,7 +309,7 @@
     const container = document.getElementById("map-container");
     if (!container) return;
     if (typeof jsVectorMap === "undefined") {
-      container.innerHTML = `<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Initializing map engine...</div></div>`;
+      container.innerHTML = `<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>${st("initializingMap", "Initializing map engine...")}</div></div>`;
       return;
     }
 
@@ -308,16 +368,16 @@
                 <span>${item.country_name}</span>
               </div>
               <div class="map-tooltip-row">
-                <span>Servers:</span>
+                <span>${st("tipServers", "Servers:")}</span>
                 <strong>${formatNumber(item.servers)} (${item.percentage.toFixed(1)}%)</strong>
               </div>
               <div class="map-tooltip-row">
-                <span>Player Traffic:</span>
-                <strong>${formatNumber(item.players)} players</strong>
+                <span>${st("tipPlayerTraffic", "Player Traffic:")}</span>
+                <strong>${formatNumber(item.players)} ${st("playersUnit", "players")}</strong>
               </div>
               <div class="map-tooltip-row">
-                <span>Density:</span>
-                <strong>${avgPerNode} players / node</strong>
+                <span>${st("tipDensity", "Density:")}</span>
+                <strong>${avgPerNode} ${st("playersUnit", "players")} ${st("perNode", "/ node")}</strong>
               </div>`,
               true
             );
@@ -329,7 +389,7 @@
                 <span>${currentName}</span>
               </div>
               <div class="map-tooltip-row" style="opacity: 0.6;">
-                <span>No active telemetry nodes</span>
+                <span>${st("noTelemetryNodes", "No active telemetry nodes")}</span>
               </div>`,
               true
             );
@@ -357,7 +417,7 @@
       mapTopNode.textContent = `${topCountry.country_name} [${topCountry.country}]`;
     }
     if (mapTotalGeo) {
-      mapTotalGeo.textContent = `${geo.length} Active Regions`;
+      mapTotalGeo.textContent = fmt(st("activeRegions", "{n} Active Regions"), { n: geo.length });
     }
     if (mapTotalPlayers) {
       const sumPlayers = geo.reduce((acc, g) => acc + g.players, 0);
@@ -366,7 +426,7 @@
     if (mapAvgDensity) {
       const sumS = geo.reduce((acc, g) => acc + g.servers, 0);
       const sumP = geo.reduce((acc, g) => acc + g.players, 0);
-      mapAvgDensity.textContent = sumS > 0 ? `${(sumP / sumS).toFixed(1)} / node` : "0 / node";
+      mapAvgDensity.textContent = sumS > 0 ? `${(sumP / sumS).toFixed(1)} ${st("perNode", "/ node")}` : st("zeroPerNode", "0 / node");
     }
   }
 
@@ -380,7 +440,7 @@
     if (!data || data.length === 0) {
       svg.innerHTML = `
         <text x="50%" y="50%" text-anchor="middle" fill="#888" font-size="14">
-          No telemetry trend data available
+          ${st("noTrendData", "No telemetry trend data available")}
         </text>
       `;
       return;
@@ -537,18 +597,18 @@
           content += `
             <div class="tip-val" style="color: #ff6b2c;">
               <span class="node-dot pumpkin-dot"></span>
-              Online: <strong>${formatNumber(point.online_players)}</strong>
+              ${st("tipOnline", "Online:")} <strong>${formatNumber(point.online_players)}</strong>
             </div>
             <div class="tip-val" style="color: #6c92ff; font-size: 0.8rem; margin-top: 2px;">
               <span class="node-dot" style="background: #4169e1;"></span>
-              Peak: <strong>${formatNumber(point.peak_players)}</strong>
+              ${st("tipPeak", "Peak:")} <strong>${formatNumber(point.peak_players)}</strong>
             </div>
           `;
         } else {
           content += `
             <div class="tip-val" style="color: #ff6b2c;">
               <span class="node-dot pumpkin-dot"></span>
-              Active Total: <strong>${formatNumber(point.active_servers)}</strong>
+              ${st("tipActiveTotal", "Active Total:")} <strong>${formatNumber(point.active_servers)}</strong>
             </div>
             <div class="tip-val" style="color: #ffd93d; font-size: 0.8rem; margin-top: 2px;">
               <span class="node-dot" style="background: #ffd93d;"></span>
@@ -615,7 +675,7 @@
       if (!container) return;
 
       if (!items || items.length === 0) {
-        container.innerHTML = `<div class="empty-state">No distribution data reported</div>`;
+        container.innerHTML = `<div class="empty-state">${st("noDistData", "No distribution data reported")}</div>`;
         return;
       }
 
@@ -667,7 +727,7 @@
 
     let items = [...(state.geo || [])];
     if (items.length === 0) {
-      container.innerHTML = `<div class="empty-state">No geolocation data reported</div>`;
+      container.innerHTML = `<div class="empty-state">${st("noGeoData", "No geolocation data reported")}</div>`;
       return;
     }
 
@@ -689,7 +749,7 @@
                 <span>${item.country_name}</span>
               </span>
               <span class="dist-item-counts">
-                <strong>${formatNumber(item.servers)}</strong> servers · <strong>${formatNumber(item.players)}</strong> players (${pct}%)
+                <strong>${formatNumber(item.servers)}</strong> ${st("serversUnit", "servers")} · <strong>${formatNumber(item.players)}</strong> ${st("playersUnit", "players")} (${pct}%)
               </span>
             </div>
             <div class="dist-bar-track">
@@ -718,7 +778,7 @@
 
     const items = state.plugins || [];
     if (items.length === 0) {
-      container.innerHTML = `<div class="empty-state">No plugin telemetry reported</div>`;
+      container.innerHTML = `<div class="empty-state">${st("noPluginData", "No plugin telemetry reported")}</div>`;
       return;
     }
 
@@ -728,7 +788,7 @@
         if (p.market_plugin_id) {
           marketBadge = `
             <a href="https://market.pumpkinmc.org/" class="plugin-market-link" target="_blank" rel="noopener" title="Available on Marketplace">
-              <i class="fa-solid fa-store"></i> Market
+              <i class="fa-solid fa-store"></i> ${st("marketBadge", "Market")}
             </a>
           `;
         }
@@ -744,7 +804,7 @@
             </div>
             <div class="plugin-right">
               <span class="plugin-pct">${p.adoption_percentage.toFixed(1)}%</span>
-              <span class="plugin-servers-count">${formatNumber(p.server_count)} servers</span>
+              <span class="plugin-servers-count">${formatNumber(p.server_count)} ${st("serversCountUnit", "servers")}</span>
             </div>
           </div>
         `;
@@ -816,14 +876,22 @@
       }, 100);
     });
 
+    // Re-render dynamic strings when the site language changes (i18n.js
+    // already re-applies all static [data-i18n] markup at that point).
+    window.addEventListener("pumpkin-lang-change", async () => {
+      await loadStatsStrings();
+      renderAll();
+    });
+
     // Auto-refresh every 60 seconds
     setInterval(() => {
       fetchTelemetryData();
     }, 60000);
   }
 
-  function init() {
+  async function init() {
     setupEvents();
+    await loadStatsStrings();
     renderWorldMap();
     fetchTelemetryData();
   }

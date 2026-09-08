@@ -32,8 +32,9 @@
 }
 
 .dev-hero .strikethrough {
-  opacity: 0.6;
+  opacity: 0.85;
   text-decoration: line-through;
+  text-decoration-color: var(--color-orange);
 }
 
 .dev-hero-btns {
