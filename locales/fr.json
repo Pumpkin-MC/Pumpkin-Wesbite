@@ -4,6 +4,7 @@
     "developers": "Développeurs",
     "blog": "Blog",
     "market": "Marketplace",
+    "stats": "Statistiques",
     "download": "Télécharger"
   },
   "banner": {
@@ -43,6 +44,6 @@
     "title": "Voyez la",
     "titleHighlight": "différence",
     "startupTitle": "Temps de démarrage",
-    "ramTitle": "Utilisation RAM"
+    "ramTitle": "Utilisation de la RAM"
   }
 }
