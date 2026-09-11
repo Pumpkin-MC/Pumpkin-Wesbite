@@ -218,30 +218,6 @@
           </div>
         </section>
 
-        <!-- Ecosystem Vitals & Efficiency Bar -->
-        <section class="vitals-bar">
-          <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-earth-americas"></i> Global Presence</span>
-            <span class="vital-value" id="vital-countries-span">-</span>
-            <span class="vital-note" id="vital-countries-note">Participating host countries</span>
-          </div>
-          <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-heart-pulse"></i> Node Liveness Rate</span>
-            <span class="vital-value" id="vital-liveness-rate">-</span>
-            <span class="vital-note" id="vital-liveness-note">Responding live right now</span>
-          </div>
-          <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-chart-pie"></i> Load Per Node</span>
-            <span class="vital-value" id="vital-avg-load">-</span>
-            <span class="vital-note" id="vital-avg-load-note">Average online players / server</span>
-          </div>
-          <div class="vital-item">
-            <span class="vital-title"><i class="fa-solid fa-diagram-project"></i> Routing Architecture</span>
-            <span class="vital-value" id="vital-proxy-ratio">-</span>
-            <span class="vital-note" id="vital-proxy-note">Proxy to backend ratio</span>
-          </div>
-        </section>
-
         <!-- Interactive Global Telemetry World Map -->
         <section class="stats-section">
           <div class="section-head">
@@ -292,18 +268,27 @@
           </div>
         </section>
 
-        <!-- 24-Hour Activity Trends -->
+        <!-- Historical Activity Trends -->
         <section class="stats-section">
           <div class="section-head">
             <div>
-              <h2><i class="fa-solid fa-chart-line"></i> 24-Hour Network Trends</h2>
+              <h2><i class="fa-solid fa-chart-line"></i> Historical Activity Trends</h2>
               <p class="section-head-desc">
-                Hourly activity snapshots comparing peak concurrent players and online server nodes.
+                Activity snapshots comparing concurrent players and online server nodes over time.
               </p>
             </div>
-            <div class="segmented-control">
-              <button type="button" class="control-btn active" data-trend-mode="players">Players</button>
-              <button type="button" class="control-btn" data-trend-mode="servers">Servers</button>
+            <div class="trends-controls-wrap">
+              <div class="segmented-control" id="trend-range-controls" aria-label="Trend Timeframe">
+                <button type="button" class="control-btn active" data-trend-range="24h">24H</button>
+                <button type="button" class="control-btn" data-trend-range="7d">7D</button>
+                <button type="button" class="control-btn" data-trend-range="30d">30D</button>
+                <button type="button" class="control-btn" data-trend-range="90d">90D</button>
+                <button type="button" class="control-btn" data-trend-range="all">Lifetime</button>
+              </div>
+              <div class="segmented-control" id="trend-mode-controls" aria-label="Metric Series">
+                <button type="button" class="control-btn active" data-trend-mode="players">Players</button>
+                <button type="button" class="control-btn" data-trend-mode="servers">Servers</button>
+              </div>
             </div>
           </div>
 
@@ -342,15 +327,15 @@
 
             <div class="chart-summary-bar">
               <div class="chart-sum-item">
-                <span class="sum-label">24h Peak</span>
+                <span class="sum-label" id="chart-sum-peak-label">24h Peak</span>
                 <span class="sum-val" id="chart-sum-peak">-</span>
               </div>
               <div class="chart-sum-item">
-                <span class="sum-label">24h Average</span>
+                <span class="sum-label" id="chart-sum-avg-label">24h Average</span>
                 <span class="sum-val" id="chart-sum-avg">-</span>
               </div>
               <div class="chart-sum-item">
-                <span class="sum-label">24h Low</span>
+                <span class="sum-label" id="chart-sum-min-label">24h Low</span>
                 <span class="sum-val" id="chart-sum-min">-</span>
               </div>
               <div class="chart-sum-item">

@@ -8,11 +8,18 @@
     systems: null,
     geo: [],
     plugins: [],
+    trendRange: "24h", // '24h' | '7d' | '30d' | '90d' | 'all'
     trendMode: "players", // 'players' | 'servers'
     mapMode: "servers", // 'servers' | 'players'
     geoSort: "servers", // 'servers' | 'players'
     lastFetchTime: null,
     isLoading: false,
+    expanded: {
+      os: false,
+      cpu: false,
+      plugins: false,
+      geo: false,
+    },
   };
 
   // Format numbers with locale commas
@@ -37,6 +44,26 @@
     try {
       const d = new Date(isoStr);
       return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    } catch {
+      return isoStr;
+    }
+  }
+
+  function formatAxisTimestamp(isoStr, range) {
+    if (!isoStr) return "";
+    try {
+      const d = new Date(isoStr);
+      if (range === "24h") {
+        return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      } else if (range === "7d") {
+        return (
+          d.toLocaleDateString([], { month: "short", day: "numeric" }) +
+          " " +
+          d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        );
+      } else {
+        return d.toLocaleDateString([], { month: "short", day: "numeric" });
+      }
     } catch {
       return isoStr;
     }
@@ -69,7 +96,7 @@
       const [overviewRes, trendsRes, systemsRes, geoRes, pluginsRes] =
         await Promise.allSettled([
           fetch(`${API_BASE}/overview`).then((r) => (r.ok ? r.json() : null)),
-          fetch(`${API_BASE}/trends`).then((r) => (r.ok ? r.json() : [])),
+          fetch(`${API_BASE}/trends?range=${encodeURIComponent(state.trendRange)}`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${API_BASE}/systems`).then((r) => (r.ok ? r.json() : null)),
           fetch(`${API_BASE}/geo`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${API_BASE}/plugins`).then((r) => (r.ok ? r.json() : [])),
@@ -101,11 +128,31 @@
     }
   }
 
+  // Fetch only trends for rapid range switching
+  async function fetchTrendsOnly() {
+    const wrap = document.getElementById("chart-wrap");
+    if (wrap) wrap.style.opacity = "0.4";
+
+    try {
+      const res = await fetch(`${API_BASE}/trends?range=${encodeURIComponent(state.trendRange)}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (Array.isArray(json)) {
+          state.trends = json;
+          renderChart();
+        }
+      }
+    } catch (err) {
+      console.error("Failed to update trends:", err);
+    } finally {
+      if (wrap) wrap.style.opacity = "1";
+    }
+  }
+
 
   // Render everything
   function renderAll() {
     renderKPIs();
-    renderVitals();
     renderWorldMap();
     renderChart();
     renderSystems();
@@ -184,61 +231,6 @@
       } else {
         pluginsSubEl.textContent = "";
       }
-    }
-  }
-
-  // Render Secondary Vitals Bar
-  function renderVitals() {
-    const o = state.overview;
-    if (!o) return;
-
-    // Global Presence
-    const countriesEl = document.getElementById("vital-countries-span");
-    const countriesNote = document.getElementById("vital-countries-note");
-    if (countriesEl) countriesEl.textContent = formatNumber(o.total_countries);
-    if (countriesNote) {
-      const topCountry = state.geo && state.geo[0] ? `${state.geo[0].country_name} [${state.geo[0].country}]` : "Active nodes";
-      countriesNote.textContent = `Leading: ${topCountry}`;
-    }
-
-    // Node Liveness Rate
-    const livenessRate = o.active_24h_servers > 0
-      ? ((o.live_servers / o.active_24h_servers) * 100).toFixed(1)
-      : "0.0";
-    const liveRateEl = document.getElementById("vital-liveness-rate");
-    const liveRateNote = document.getElementById("vital-liveness-note");
-    if (liveRateEl) liveRateEl.textContent = `${livenessRate}%`;
-    if (liveRateNote) liveRateNote.textContent = `${o.live_servers} of ${o.active_24h_servers} servers responding now`;
-
-    // Average Players Per Node
-    const avgLoad = o.active_24h_servers > 0
-      ? (o.total_online_players / o.active_24h_servers).toFixed(1)
-      : "0.0";
-    const avgLoadEl = document.getElementById("vital-avg-load");
-    const avgLoadNote = document.getElementById("vital-avg-load-note");
-    if (avgLoadEl) avgLoadEl.textContent = avgLoad;
-    if (avgLoadNote) {
-      const peakPerNode = o.active_24h_servers > 0
-        ? (o.peak_24h_players / o.active_24h_servers).toFixed(1)
-        : "0.0";
-      avgLoadNote.textContent = `24h peak: ${peakPerNode} players / node`;
-    }
-
-    // Proxy vs Backend Ratio
-    const proxyRatioEl = document.getElementById("vital-proxy-ratio");
-    const proxyRatioNote = document.getElementById("vital-proxy-note");
-    if (proxyRatioEl) {
-      const totalLive = o.live_pumpkin_servers + o.live_vine_servers;
-      if (totalLive > 0) {
-        const vinePct = ((o.live_vine_servers / totalLive) * 100).toFixed(0);
-        const pumpkinPct = ((o.live_pumpkin_servers / totalLive) * 100).toFixed(0);
-        proxyRatioEl.textContent = `${vinePct}% Vine / ${pumpkinPct}% Pumpkin`;
-      } else {
-        proxyRatioEl.textContent = `${o.live_vine_servers} Vine : ${o.live_pumpkin_servers} Pumpkin`;
-      }
-    }
-    if (proxyRatioNote) {
-      proxyRatioNote.textContent = "Multi-tier network routing";
     }
   }
 
@@ -456,7 +448,7 @@
     data.forEach((d, i) => {
       if (i % labelInterval === 0 || i === data.length - 1) {
         const x = getX(i);
-        const timeStr = formatTimestamp(d.timestamp);
+        const timeStr = formatAxisTimestamp(d.timestamp, state.trendRange);
         xLabelsSvg += `
           <text x="${x}" y="${padTop + chartH + 20}" class="chart-axis-label" text-anchor="middle">${timeStr}</text>
         `;
@@ -603,6 +595,22 @@
       if (sumMin) sumMin.textContent = formatNumber(minVal);
       if (sumNow) sumNow.textContent = formatNumber(nowVal);
     }
+
+    const rangeLabelMap = {
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "all": "Lifetime",
+    };
+    const rangeLabel = rangeLabelMap[state.trendRange] || state.trendRange;
+
+    const peakLabelEl = document.getElementById("chart-sum-peak-label");
+    const avgLabelEl = document.getElementById("chart-sum-avg-label");
+    const minLabelEl = document.getElementById("chart-sum-min-label");
+    if (peakLabelEl) peakLabelEl.textContent = `${rangeLabel} Peak`;
+    if (avgLabelEl) avgLabelEl.textContent = `${rangeLabel} Average`;
+    if (minLabelEl) minLabelEl.textContent = `${rangeLabel} Low`;
   }
 
   // Render Systems & Hardware Distributions
@@ -610,7 +618,7 @@
     const s = state.systems;
     if (!s) return;
 
-    function renderDistList(containerId, items, accentClass = "") {
+    function renderDistList(containerId, items, accentClass = "", limit = null, stateKey = null) {
       const container = document.getElementById(containerId);
       if (!container) return;
 
@@ -619,7 +627,11 @@
         return;
       }
 
-      container.innerHTML = items
+      const isExpanded = Boolean(stateKey && state.expanded[stateKey]);
+      const hasLimit = limit !== null && items.length > limit;
+      const displayItems = hasLimit && !isExpanded ? items.slice(0, limit) : items;
+
+      const itemsHtml = displayItems
         .map((item) => {
           const pct = item.percentage.toFixed(1);
           let icon = "";
@@ -649,15 +661,27 @@
           `;
         })
         .join("");
+
+      let toggleBtnHtml = "";
+      if (hasLimit) {
+        const remaining = items.length - limit;
+        toggleBtnHtml = `
+          <button type="button" class="see-more-btn" data-toggle-expand="${stateKey}" aria-expanded="${isExpanded}">
+            ${isExpanded ? 'See less <i class="fa-solid fa-chevron-up"></i>' : `See more (+${remaining}) <i class="fa-solid fa-chevron-down"></i>`}
+          </button>
+        `;
+      }
+
+      container.innerHTML = itemsHtml + toggleBtnHtml;
     }
 
-    renderDistList("dist-os", s.os, "");
+    renderDistList("dist-os", s.os, "", 5, "os");
     renderDistList("dist-arch", s.arch, "accent-blue");
     renderDistList("dist-software", s.software_versions, "accent-green");
     renderDistList("dist-mc", s.minecraft_versions, "accent-yellow");
     renderDistList("dist-ram", s.ram_distribution, "accent-purple");
     renderDistList("dist-total-ram", s.total_ram_distribution, "accent-blue");
-    renderDistList("dist-cpu", s.cpu_models, "");
+    renderDistList("dist-cpu", s.cpu_models, "", 10, "cpu");
   }
 
   // Render Geo Distribution
@@ -677,7 +701,12 @@
       items.sort((a, b) => b.servers - a.servers);
     }
 
-    container.innerHTML = items
+    const limit = 10;
+    const isExpanded = Boolean(state.expanded.geo);
+    const hasLimit = items.length > limit;
+    const displayItems = hasLimit && !isExpanded ? items.slice(0, limit) : items;
+
+    const itemsHtml = displayItems
       .map((item) => {
         const pct = item.percentage.toFixed(1);
 
@@ -699,10 +728,27 @@
         `;
       })
       .join("");
+
+    let toggleBtnHtml = "";
+    if (hasLimit) {
+      const remaining = items.length - limit;
+      toggleBtnHtml = `
+        <button type="button" class="see-more-btn" data-toggle-expand="geo" aria-expanded="${isExpanded}">
+          ${isExpanded ? 'See less <i class="fa-solid fa-chevron-up"></i>' : `See more (+${remaining}) <i class="fa-solid fa-chevron-down"></i>`}
+        </button>
+      `;
+    }
+
+    container.innerHTML = itemsHtml + toggleBtnHtml;
   }
 
   window.pumpkinStatsFocusCountry = function (code) {
-    const target = document.getElementById(`geo-item-${code}`);
+    let target = document.getElementById(`geo-item-${code}`);
+    if (!target && !state.expanded.geo) {
+      state.expanded.geo = true;
+      renderGeo();
+      target = document.getElementById(`geo-item-${code}`);
+    }
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "center" });
       target.classList.remove("highlight-pulse");
@@ -722,7 +768,12 @@
       return;
     }
 
-    container.innerHTML = items
+    const limit = 10;
+    const isExpanded = Boolean(state.expanded.plugins);
+    const hasLimit = items.length > limit;
+    const displayItems = hasLimit && !isExpanded ? items.slice(0, limit) : items;
+
+    const itemsHtml = displayItems
       .map((p) => {
         let marketBadge = "";
         if (p.market_plugin_id) {
@@ -750,6 +801,18 @@
         `;
       })
       .join("");
+
+    let toggleBtnHtml = "";
+    if (hasLimit) {
+      const remaining = items.length - limit;
+      toggleBtnHtml = `
+        <button type="button" class="see-more-btn" data-toggle-expand="plugins" aria-expanded="${isExpanded}">
+          ${isExpanded ? 'See less <i class="fa-solid fa-chevron-up"></i>' : `See more (+${remaining}) <i class="fa-solid fa-chevron-down"></i>`}
+        </button>
+      `;
+    }
+
+    container.innerHTML = itemsHtml + toggleBtnHtml;
   }
 
   // Set up event listeners
@@ -760,6 +823,19 @@
         fetchTelemetryData();
       });
     }
+
+    // Chart range toggle buttons
+    const rangeBtns = document.querySelectorAll("[data-trend-range]");
+    rangeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const newRange = btn.getAttribute("data-trend-range");
+        if (state.trendRange === newRange) return;
+        rangeBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        state.trendRange = newRange;
+        fetchTrendsOnly();
+      });
+    });
 
     // Chart toggle buttons
     const chartBtns = document.querySelectorAll("[data-trend-mode]");
@@ -805,6 +881,35 @@
         state.geoSort = btn.getAttribute("data-geo-sort");
         renderGeo();
       });
+    });
+
+    // Delegated click handler for "See more" / "See less" buttons
+    document.addEventListener("click", (e) => {
+      const toggleBtn = e.target.closest("[data-toggle-expand]");
+      if (!toggleBtn) return;
+      const key = toggleBtn.getAttribute("data-toggle-expand");
+      if (state.expanded && state.expanded[key] !== undefined) {
+        const wasExpanded = state.expanded[key];
+        state.expanded[key] = !wasExpanded;
+
+        if (key === "plugins") {
+          renderPlugins();
+        } else if (key === "geo") {
+          renderGeo();
+        } else {
+          renderSystems();
+        }
+
+        if (wasExpanded) {
+          const card = toggleBtn.closest(".dist-card") || toggleBtn.closest(".stats-section");
+          if (card) {
+            const rect = card.getBoundingClientRect();
+            if (rect.top < 0) {
+              card.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        }
+      }
     });
 
     // Window resize handler for responsive chart

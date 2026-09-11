@@ -265,46 +265,6 @@
   min-height: 1.5rem;
 }
 
-/* Secondary Vitals Bar */
-.vitals-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  background: var(--color-surface);
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  padding: 1.25rem 1.5rem;
-  border-radius: 4px;
-}
-
-.vital-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.vital-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.vital-value {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--color-text);
-  font-variant-numeric: tabular-nums;
-}
-
-.vital-note {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-}
-
 /* Badges & Tags */
 .badge-tag {
   display: inline-flex;
@@ -421,6 +381,13 @@
 .control-btn.active {
   background: var(--color-orange);
   color: var(--color-black);
+}
+
+.trends-controls-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* World Map Component */
@@ -610,6 +577,7 @@
   position: relative;
   width: 100%;
   height: 320px;
+  transition: opacity 0.2s ease;
 }
 
 .chart-svg {
@@ -892,6 +860,47 @@
   color: var(--color-text-muted);
 }
 
+/* Expandable List Toggle ("See more" / "See less") */
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin-top: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.see-more-btn:hover {
+  background: rgba(255, 107, 44, 0.12);
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+  transform: translateY(-1px);
+}
+
+.see-more-btn:active {
+  transform: translateY(0);
+}
+
+.see-more-btn:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.see-more-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
 /* Privacy & Info Banner */
 .telemetry-info-card {
   background: linear-gradient(135deg, #181818 0%, #111111 100%);
@@ -944,9 +953,6 @@
   .kpi-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .vitals-bar {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .dist-grid {
     grid-template-columns: 1fr;
   }
@@ -960,9 +966,6 @@
 
 @media (max-width: 640px) {
   .kpi-grid {
-    grid-template-columns: 1fr;
-  }
-  .vitals-bar {
     grid-template-columns: 1fr;
   }
   .chart-summary-bar {
